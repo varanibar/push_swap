@@ -6,11 +6,19 @@
 /*   By: lekoelma <lekoelma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:51:39 by lekoelma          #+#    #+#             */
-/*   Updated: 2026/04/18 20:12:20 by lekoelma         ###   ########.fr       */
+/*   Updated: 2026/04/20 11:56:02 by lekoelma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9' || c == '-')
+		return (1);
+	else
+		return (0);
+}
 
 int	ft_atoi(const char *nptr)
 {
@@ -37,11 +45,11 @@ int	ft_atoi(const char *nptr)
 	return (nb * sign);
 }
 
-void	push(t_node **stack, int val)
+void	push(t_list **stack, int val)
 {
-	t_node	*new;
+	t_list	*new;
 
-	new = malloc(sizeof(t_node));
+	new = malloc(sizeof(t_list));
 	if (!new)
 		return ;
 	new->val = val;
@@ -49,10 +57,10 @@ void	push(t_node **stack, int val)
 	*stack = new;
 }
 
-void	del_top(t_node **stack)
+void	del_top(t_list **stack)
 {
-	t_node	*current;
-	t_node	*new_top;
+	t_list	*current;
+	t_list	*new_top;
 
 	if (*stack == NULL)
 		return ;
@@ -62,9 +70,9 @@ void	del_top(t_node **stack)
 	*stack = new_top;
 }
 
-void	print_stack(t_node *stack)
+void	print_stack(t_list *stack)
 {
-	t_node	*current;
+	t_list	*current;
 
 	current = stack;
 	while (current != NULL)
@@ -74,10 +82,10 @@ void	print_stack(t_node *stack)
 	}
 }
 
-void	swap(t_node **stack)
+void	swap(t_list **stack)
 {
-	t_node	*current;
-	t_node	*next_node;
+	t_list	*current;
+	t_list	*next_node;
 
 	current = *stack;
 	if (*stack == NULL || current->next == NULL)
@@ -88,11 +96,11 @@ void	swap(t_node **stack)
 	*stack = next_node;
 }
 
-void	rotate(t_node **stack)
+void	rotate(t_list **stack)
 {
-	t_node	*current;
-	t_node	*top;
-	t_node	*second;
+	t_list	*current;
+	t_list	*top;
+	t_list	*second;
 
 	current = *stack;
 	top = *stack;
@@ -106,11 +114,11 @@ void	rotate(t_node **stack)
 	*stack = second;
 }
 
-void	reverse_rotate(t_node **stack)
+void	reverse_rotate(t_list **stack)
 {
-	t_node	*current;
-	t_node	*top;
-	t_node	*prev;
+	t_list	*current;
+	t_list	*top;
+	t_list	*prev;
 
 	current = *stack;
 	if (*stack == NULL || current->next == NULL)
@@ -126,21 +134,44 @@ void	reverse_rotate(t_node **stack)
 	*stack = current;
 }
 
+int check_input(char *input)
+{
+	int i;
+	i = 0;
+
+	while (input[i])
+	{
+		if (!(ft_isdigit(input[i])))
+			return(0);
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
-	t_node *stack_a;
+	t_list *stack_a;
 	int input[argc];
 	int i;
 	int j;
 	i = 0;
-	j = argc - 1;
+	j = 1;
 	stack_a = NULL;
 	if (argc == 1)
 	{
 		write(1, "Error\n", 6);
 		return (0);
 	}
-
+	while (argv[j])
+	{
+		if (!check_input(argv[j]))
+		{
+			printf("%s\n", "Error");
+			return(0);
+		}
+		j++;
+	}
+	j = argc - 1;
 	while (j > 0)
 	{
 		input[i] = ft_atoi(argv[j]);
