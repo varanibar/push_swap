@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   push_swap_lev.h                                    :+:    :+:            */
+/*   push_to_list.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
+/*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2026/04/16 15:01:02 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/18 15:19:41 by varaniba      ########   odam.nl         */
+/*   Created: 2026/04/20 14:14:58 by varaniba      #+#    #+#                 */
+/*   Updated: 2026/04/20 15:58:24 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_LEV_H
-# define PUSH_SWAP_LEV_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-
-typedef struct s_node
+int	new_node(t_list **stack, int val)
 {
-	int				val;
-	struct s_node	*next;
-}					t_node;
+	t_list	*new;
 
-void	push(t_node **stack, int val);
-
-#endif
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return(-1);
+	new->val = val;
+	new->next = *stack;
+	*stack = new;
+	return (1);
+}
