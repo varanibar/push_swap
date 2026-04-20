@@ -6,19 +6,11 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/18 13:51:14 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/20 15:58:05 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/20 19:24:41 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_isdigit(int c)
-{
-	if ((c >= '0' && c <= '9') || c == '-')
-		return (1);
-	else
-		return (0);
-}
 
 int	ft_atoi(const char *nptr)
 {
@@ -45,19 +37,6 @@ int	ft_atoi(const char *nptr)
 	return (nb * sign);
 }
 
-void	del_top(t_list **stack)
-{
-	t_list	*current;
-	t_list	*new_top;
-
-	if (*stack == NULL)
-		return ;
-	current = *stack;
-	new_top = current->next;
-	free(current);
-	*stack = new_top;
-}
-
 void	print_stack(t_list *stack)
 {
 	t_list	*current;
@@ -70,75 +49,10 @@ void	print_stack(t_list *stack)
 	}
 }
 
-void	swap(t_list **stack)
-{
-	t_list	*current;
-	t_list	*next_node;
-
-	current = *stack;
-	if (*stack == NULL || current->next == NULL)
-		return ;
-	next_node = current->next;
-	current->next = next_node->next;
-	next_node->next = current;
-	*stack = next_node;
-}
-
-void	rotate(t_list **stack)
-{
-	t_list	*current;
-	t_list	*top;
-	t_list	*second;
-
-	current = *stack;
-	top = *stack;
-	if (*stack == NULL || current->next == NULL)
-		return ;
-	second = current->next;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = top;
-	top->next = NULL;
-	*stack = second;
-}
-
-void	reverse_rotate(t_list **stack)
-{
-	t_list	*current;
-	t_list	*top;
-	t_list	*prev;
-
-	current = *stack;
-	if (*stack == NULL || current->next == NULL)
-		return ;
-	top = *stack;
-	while (current->next != NULL)
-	{
-		prev = current;
-		current = current->next;
-	}
-	current->next = top;
-	prev->next = NULL;
-	*stack = current;
-}
-
-int check_input(char *input)
-{
-	int i;
-	i = 0;
-
-	while (input[i])
-	{
-		if (!(ft_isdigit(input[i])))
-			return(0);
-		i++;
-	}
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
 	t_list *stack_a;
+	t_list *stack_b = NULL;
 	int input[argc];
 	int i;
 	int j;
@@ -152,7 +66,7 @@ int	main(int argc, char **argv)
 	}
 	while (argv[j])
 	{
-		if (!check_input(argv[j]))
+		if (!ft_check_input(argv[j]))
 		{
 			printf("%s\n", "Error");
 			return(0);
@@ -174,12 +88,20 @@ int	main(int argc, char **argv)
 	printf("disorder = %f\n\n", disorder);
 
 	printf("%s\n", "Stack before operation:");
-
 	print_stack(stack_a);
-	rotate(&stack_a);
-	printf("%s\n", "Stack after operation:");
+	// rotate(&stack_a);
 
+	// printf("%s\n", "Stack after operation:");
+
+	// print_stack(stack_a);
+
+	//moving first node to stack b
+	stack_b = stack_a;
+	stack_a = stack_a->next;
+	stack_b->next = NULL;
+	printf("%s\n", "Stack a:");
 	print_stack(stack_a);
-
+	printf("%s\n", "Stack b:");
+	print_stack(stack_b);
 	return (0);
 }

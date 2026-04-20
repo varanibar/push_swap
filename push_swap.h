@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/20 15:58:14 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/20 18:32:35 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-int		new_node(t_list **stack, int val);
-void	del_top(t_list **stack);
-void	print_stack(t_list *stack);
-void	swap(t_list **stack);
-void	rotate(t_list **stack);
-void	reverse_rotate(t_list **stack);
-double	compute_disorder(t_list *stack);
-
+int					ft_atoi(const char *nptr);
+int					ft_add_to_stack(t_list **stack, int val);
+void				del_top(t_list **stack);
+void				print_stack(t_list *stack);
+void				swap(t_list **stack);
+void				rotate(t_list **stack);
+void				reverse_rotate(t_list **stack);
+int					ft_check_input(char *input);
+double				compute_disorder(t_list *stack);
+int					ft_lstsize(t_list *lst);
 #endif
