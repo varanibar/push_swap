@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   disorder_metric.c                                  :+:    :+:            */
+/*   ft_disorder_metric.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/20 15:23:11 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/21 17:20:08 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_lstsize(t_list *lst)
 	return (n);
 }
 
-double	compute_disorder(t_list *stack)
+double	ft_compute_disorder(t_list *stack)
 {
 	double	mistakes;
 	double	total_pairs;
