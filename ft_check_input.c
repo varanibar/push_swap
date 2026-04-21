@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/21 20:20:12 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/21 21:26:51 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,26 @@ static int	ft_is_str_valid(char *str)
 	return (0);
 }
 
-// //check for duplicates
-// static int	ft_check_dup(char **input)
-// {
-// 	int	i;
-// 	int	j;
+//check for duplicates
+static int	ft_check_dup(char **input)
+{
+	int	i;
+	int	j;
 
-// 	i = 0;
-// 	while (input[i])
-// 	{
-// 		j = i + 1;
-// 		while (input[j])
-// 		{
-// 			if (ft_atoi(input[i]) == ft_atoi(input[j]))
-// 				return (0);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
+	i = 0;
+	while (input[i])
+	{
+		j = i + 1;
+		while (input[j])
+		{
+			if (ft_atoi(input[i]) == ft_atoi(input[j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 //There if something isnt valid, this function will return 1 which
 //will signal to the whole program that it needs to stop
 //There are three possible cases :
@@ -64,55 +64,79 @@ static int	ft_is_str_valid(char *str)
 //	   they are actually flags. we need to use something like strcmp
 
 
-static int ft_strcmp_flags(const char *str)
+static int ft_flag_checker(char **argv)
 {
 	int		i;
 	int		j;
 	char	*flags[5] = {"--bench", "--simple", "--medium", "--complex", "--adaptative"};
-
+	int k;
 	i = 0;
 	j = 0;
+	k = 1;
 	while (j < 5)
 	{
-		while (str[i] != '\0' || flags[j][i] != '\0' )
+		while (argv[k][i] != '\0' || flags[j][i] != '\0' )
 		{
-			if (str[i] != flags[j][i])
+			if (argv[k][i] != flags[j][i])
 				break ;
 			i++;
 		}
-		if (str[i] == '\0' || flags[j][i] == '\0' )
-			return(1);
+		if (argv[k][i] == '\0' && flags[j][i] == '\0' )
+			k++;
 		j++;
 		i=0;
 	}
-	return (0);
+	return (k - 1);
+}
+int	ft_check_input_split(char *argv_1)
+{
+	int	i;
+	char **input;
+
+	input = ft_split(argv_1, ' ');
+	if (!input || input[0] == NULL)
+		return(write(1, "Error 2\n", 8), 0);
+	while (input[i] != NULL)
+	{
+		if (!ft_is_str_valid(input[i]))
+			return (write(1, "Error 3\n", 8), 0);
+		i++;
+	}
+	if (!ft_check_dup(input))
+		return (write(1, "Error 4\n", 8), 0);
+	return(1);
 }
 
 int	ft_check_input(int argc, char **argv)
 {
 	int	i;
-	char **tmp;
+	int flags;
 
-	i = 0;
-	tmp = NULL;
+	i = 1;
+	flags = 0;
 	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
 		return (write(1, "Error 1\n", 8), 0);
 	else if (argc == 2)
 	{
-		tmp = ft_split(argv[1], ' ');
-		if (!tmp || tmp[0] == NULL)
-			return(write(1, "Error 2\n", 8), 0);
-		while (tmp[i] != NULL)
-			if (!ft_is_str_valid(tmp[i++]))
-				return (write(1, "Error 3\n", 8), 0);
+		if (!ft_check_input_split(argv[1]))
+			return (0);
 	}
 	else
-		while (++i < argc)
+	{
+		flags += ft_flag_checker(argv);
+		i += flags;
+		while (i < argc)
+		{
 			if (!ft_is_str_valid(argv[i]))
-				if(!ft_strcmp_flags(argv[i]))
-					return (write(1, "Error 4\n", 8), 0);
+					return (write(1, "Error 5\n", 8), 0);
+			i++;
+		}
+		if (!ft_check_dup(argv + 1 + flags))
+			return (write(1, "Error 6\n", 8), 0);
+	}
 	return (1);
 }
+
 
 //Testing main for this function
 int	main(int argc, char **argv)
@@ -122,6 +146,6 @@ int	main(int argc, char **argv)
 	//check and it still might work
 
 	if (!ft_check_input(argc, argv))
-		return (0);
+		return (write(1, "Error\n", 7), 0);
 	return(0);
 }
