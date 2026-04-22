@@ -5,94 +5,70 @@
 /*                                                     +:+                    */
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2026/04/18 13:51:39 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/20 17:45:16 by lekoelma      ########   odam.nl         */
+/*   Created: 2026/04/18 13:51:14 by varaniba      #+#    #+#                 */
+/*   Updated: 2026/04/22 11:59:06 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
 
-int	ft_atoi(const char *nptr)
+void	print_stack(t_stack *stack)
 {
-	int	i;
-	int	nb;
-	int	sign;
-
-	sign = 1;
-	i = 0;
-	nb = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		nb = nb * 10 + (nptr[i] - '0');
-		i++;
-	}
-	return (nb * sign);
-}
-
-void	print_stack(t_list *stack)
-{
-	t_list	*current;
+	t_stack	*current;
 
 	current = stack;
 	while (current != NULL)
 	{
-		printf("%d\n", current->val);
+		ft_printf("%d\n", current->val);
 		current = current->next;
 	}
 }
 
-int	main(int argc, char **argv)
-{
-	t_list *stack_a;
-	int input[argc];
-	int i;
-	int j;
-	i = 0;
-	j = 1;
-	stack_a = NULL;
-	if (argc == 1)
-	{
-		write(1, "Error\n", 6);
-		return (0);
-	}
-	while (argv[j])
-	{
-		if (!check_input(argv[j]) || !check_dup(&argv[j]))
-		{
-			printf("%s\n", "Error");
-			return(0);
-		}
-		j++;
-	}
-	j = argc - 1;
-	while (j > 0)
-	{
-		input[i] = ft_atoi(argv[j]);
-		if (add_to_stack(&stack_a, input[i]) == -1)
-			return(write(1, "error", 5));
-		i++;
-		j--;
-	}
+// int	main(int argc, char **argv)
+// {
+// 	// t_stack *stack_a;
+// 	// t_stack *stack_b = NULL;
+// 	// int input[argc];
+// 	// int i;
+// 	// int j;
+// 	// i = 0;
+// 	// j = 1;
+// 	// stack_a = NULL;
 
-	double disorder;
-	disorder = compute_disorder(stack_a);
-	printf("disorder = %f\n\n", disorder);
+// 	if (!ft_check_input(argc, argv))
+// 		return(ft_printf("%s\n", "Error"), 0);
 
-	printf("%s\n", "Stack before operation:");
 
-	print_stack(stack_a);
-	rotate(&stack_a);
-	printf("%s\n", "Stack after operation:");
+// 	// j = argc - 1;
+// 	// while (j > 0)
+// 	// {
+// 	// 	input[i] = ft_atoi(argv[j]);
+// 	// 	if (new_node(&stack_a, input[i]) == -1)
+// 	// 		return(write(1, "error", 5));
+// 	// 	i++;
+// 	// 	j--;
+// 	// }
 
-	print_stack(stack_a);
+// 	// double disorder;
+// 	// disorder = ft_compute_disorder(stack_a);
+// 	// printf("disorder = %f\n\n", disorder);
 
-	return (0);
-}
+// 	// printf("%s\n", "Stack before operation:");
+// 	// print_stack(stack_a);
+// 	// // rotate(&stack_a);
+
+// 	// // printf("%s\n", "Stack after operation:");
+
+// 	// // print_stack(stack_a);
+
+// 	// //moving first node to stack b
+// 	// stack_b = stack_a;
+// 	// stack_a = stack_a->next;
+// 	// stack_b->next = NULL;
+// 	// printf("%s\n", "Stack a:");
+// 	// print_stack(stack_a);
+// 	// printf("%s\n", "Stack b:");
+// 	// print_stack(stack_b);
+// 	return (0);
+// }
