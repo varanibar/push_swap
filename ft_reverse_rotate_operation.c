@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:35:33 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/22 16:54:02 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/04/22 17:18:14 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,18 @@
 static void	reverse_rotate(t_stack **stack)
 {
 	t_stack	*current;
-	t_stack	*top;
 	t_stack	*prev;
 
-	current = *stack;
-	if (*stack == NULL || current->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	top = *stack;
+	current = *stack;
+	prev = current;
 	while (current->next != NULL)
 	{
 		prev = current;
 		current = current->next;
 	}
-	current->next = top;
+	current->next = *stack;
 	prev->next = NULL;
 	*stack = current;
 }
