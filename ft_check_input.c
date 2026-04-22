@@ -6,12 +6,11 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/21 21:26:51 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/22 08:45:36 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "push_swap.h"
-#include <stdio.h>
 #include "libft.h"
 //check if we have valid characters in the string
 //we should only have integers, one sing
@@ -93,6 +92,7 @@ int	ft_check_input_split(char *argv_1)
 	int	i;
 	char **input;
 
+	i = 0;
 	input = ft_split(argv_1, ' ');
 	if (!input || input[0] == NULL)
 		return(write(1, "Error 2\n", 8), 0);
@@ -128,7 +128,7 @@ int	ft_check_input(int argc, char **argv)
 		while (i < argc)
 		{
 			if (!ft_is_str_valid(argv[i]))
-					return (write(1, "Error 5\n", 8), 0);
+					return (ft_printf("Error 6\n"), 0);
 			i++;
 		}
 		if (!ft_check_dup(argv + 1 + flags))
@@ -146,6 +146,6 @@ int	main(int argc, char **argv)
 	//check and it still might work
 
 	if (!ft_check_input(argc, argv))
-		return (write(1, "Error\n", 7), 0);
+		return (ft_printf(1, "Error\n", 7), 0);
 	return(0);
 }
