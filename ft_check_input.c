@@ -6,11 +6,11 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/22 08:45:36 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/22 10:18:23 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "push_swap.h"
+#include "push_swap.h"
 #include "libft.h"
 //check if we have valid characters in the string
 //we should only have integers, one sing
@@ -72,7 +72,7 @@ static int ft_flag_checker(char **argv)
 	i = 0;
 	j = 0;
 	k = 1;
-	while (j < 5)
+	while (j < 5 && k < 3)
 	{
 		while (argv[k][i] != '\0' || flags[j][i] != '\0' )
 		{
@@ -83,11 +83,12 @@ static int ft_flag_checker(char **argv)
 		if (argv[k][i] == '\0' && flags[j][i] == '\0' )
 			k++;
 		j++;
-		i=0;
+		i = 0;
 	}
 	return (k - 1);
 }
-int	ft_check_input_split(char *argv_1)
+
+static int	ft_check_input_split(char *argv_1)
 {
 	int	i;
 	char **input;
@@ -95,15 +96,15 @@ int	ft_check_input_split(char *argv_1)
 	i = 0;
 	input = ft_split(argv_1, ' ');
 	if (!input || input[0] == NULL)
-		return(write(1, "Error 2\n", 8), 0);
+		return(ft_printf("Error in split : ft_split didnt work or full of ' ' passed as argument\n"), 0);
 	while (input[i] != NULL)
 	{
 		if (!ft_is_str_valid(input[i]))
-			return (write(1, "Error 3\n", 8), 0);
+			return (ft_printf("Error in split : invalid values\n"), 0);
 		i++;
 	}
 	if (!ft_check_dup(input))
-		return (write(1, "Error 4\n", 8), 0);
+		return (ft_printf("Error in split : duplicates\n"), 0);
 	return(1);
 }
 
@@ -115,7 +116,7 @@ int	ft_check_input(int argc, char **argv)
 	i = 1;
 	flags = 0;
 	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
-		return (write(1, "Error 1\n", 8), 0);
+		return (ft_printf("Error in first condition\n"), 0);
 	else if (argc == 2)
 	{
 		if (!ft_check_input_split(argv[1]))
@@ -125,27 +126,26 @@ int	ft_check_input(int argc, char **argv)
 	{
 		flags += ft_flag_checker(argv);
 		i += flags;
+		if (i == argc)
+			return(ft_printf("Error : Only flags present\n"), 0);
 		while (i < argc)
-		{
-			if (!ft_is_str_valid(argv[i]))
-					return (ft_printf("Error 6\n"), 0);
-			i++;
-		}
+			if (!ft_is_str_valid(argv[i++]))
+					return (ft_printf("Error : invalid values\n"), 0);
 		if (!ft_check_dup(argv + 1 + flags))
-			return (write(1, "Error 6\n", 8), 0);
+			return (ft_printf("Error : duplicates \n"), 0);
 	}
 	return (1);
 }
 
 
-//Testing main for this function
-int	main(int argc, char **argv)
-{
-	//one function should verify all the conditions for all the
-	//arguments, otherwise one argument might not pass the
-	//check and it still might work
+// Testing main for this function
+// int	main(int argc, char **argv)
+// {
+// 	//one function should verify all the conditions for all the
+// 	//arguments, otherwise one argument might not pass the
+// 	//check and it still might work
 
-	if (!ft_check_input(argc, argv))
-		return (ft_printf(1, "Error\n", 7), 0);
-	return(0);
-}
+// 	if (!ft_check_input(argc, argv))
+// 		return (ft_printf("Error\n"), 0);
+// 	return(0);
+// }
