@@ -6,32 +6,20 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/21 17:20:08 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/22 09:15:19 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
 
-int	ft_lstsize(t_list *lst)
-{
-	int		n;
-
-	n = 0;
-	while (lst != NULL)
-	{
-		n++;
-		lst = lst->next;
-	}
-	return (n);
-}
-
-double	ft_compute_disorder(t_list *stack)
+double	ft_compute_disorder(t_stack *stack)
 {
 	double	mistakes;
 	double	total_pairs;
 	int	i;
-	t_list *current;
-	t_list *next;
+	t_stack *current;
+	t_stack *next;
 
 	mistakes = 0;
 	total_pairs = 0;
