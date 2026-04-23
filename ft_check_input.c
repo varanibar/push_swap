@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/23 15:09:36 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/23 15:13:00 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,12 @@ void	ft_ps_lstclear(t_stack **stack)
 		*stack = tmp;
 	}
 }
-
+// static void	free_input(char **array, int i)
+// {
+// 	while (i > 0)
+// 		free(array[--i]);
+// 	free(array);
+// }
 static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 {
 	int	i;
@@ -149,6 +154,7 @@ static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 			return (ft_ps_lstclear(stack), 0);
 		while (input[j] != NULL)
 		{
+			ft_printf("j = %\n",j);
 			if (!ft_is_str_valid(input[j]))
 				return (free(input), ft_ps_lstclear(stack), 0);
 			if (ft_add_to_stack(stack, ft_atoi(input[j])) == -1)
@@ -157,7 +163,7 @@ static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 		}
 		i++;
 		j = 0;
-		free(input[0]);
+		free(input);
 	}
 
 	// print_stack(*stack);
