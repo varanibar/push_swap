@@ -6,14 +6,25 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/22 10:18:23 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/23 15:09:36 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
-//check if we have valid characters in the string
-//we should only have integers, one sing
+
+// void	print_stack(t_stack *stack)
+// {
+// 	t_stack	*current;
+
+// 	current = stack;
+// 	while (current != NULL)
+// 	{
+// 		ft_printf("%d\n", current->val);
+// 		current = current->next;
+// 	}
+// }
+
 static int	ft_is_str_valid(char *str)
 {
 	int	i;
@@ -28,124 +39,191 @@ static int	ft_is_str_valid(char *str)
 	return (0);
 }
 
-//check for duplicates
-static int	ft_check_dup(char **input)
+static int	ft_check_dup(t_stack *stack)
 {
 	int	i;
-	int	j;
+	t_stack *current;
+	t_stack *next;
 
 	i = 0;
-	while (input[i])
+	current = stack;
+	while (current != NULL && current->next != NULL)
 	{
-		j = i + 1;
-		while (input[j])
+		if (i != 0)
+			current = current->next;
+		next = current->next;
+		while (next != NULL)
 		{
-			if (ft_atoi(input[i]) == ft_atoi(input[j]))
+			if (current->val == next->val)
 				return (0);
+			next = next->next;
+		}
+		i++;
+	}
+	return (1);
+}
+
+static int ft_flag_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	if (s1[i] != '\0' || s2[i] != '\0' )
+		return(0);
+	return(1);
+}
+
+static char *ft_get_flag_type(int j)
+{
+	char *methods[5];
+
+	methods[0] = "--bench";
+	methods[1] = "--simple";
+	methods[2] = "--medium";
+	methods[3] = "--complex";
+	methods[4] = "--adaptative";
+	return (methods[j]);
+}
+
+
+static int ft_flag_checker(char **input, int n, t_flags *flags)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while ((i < n && i < 2))
+	{
+		j = 0;
+		while (j < 5)
+		{
+			if (ft_flag_strcmp(input[i], ft_get_flag_type(j)))
+			{
+				if (j == 0 && !flags->bench)
+					flags->bench = 1;
+				else if (j > 0 && !flags->method)
+					flags->method = j;
+				break ;
+			}
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return ((bool)flags->bench + (bool)flags->method);
 }
-//There if something isnt valid, this function will return 1 which
-//will signal to the whole program that it needs to stop
-//There are three possible cases :
-//	-argc is one, no arguments to work with, error
-//	-argc is two, then the second argument must be the argument
-//	   that contains all the numbers in a string, so we need to first
-//	   split it using ft split and then pass the split arguments to
-//	   the next check. If it is not this string (like just a flag)
-//	   then error.
-//	-argc is more than two, the point to check here is that we can
-//	   maybe have argv[1] and argv[2] as flags, so in case those
-//	   arent valid, we need to see if they are not valid because
-//	   they are actually flags. we need to use something like strcmp
 
-
-static int ft_flag_checker(char **argv)
+void	ft_ps_lstclear(t_stack **stack)
 {
-	int		i;
-	int		j;
-	char	*flags[5] = {"--bench", "--simple", "--medium", "--complex", "--adaptative"};
-	int k;
-	i = 0;
-	j = 0;
-	k = 1;
-	while (j < 5 && k < 3)
+	t_stack	*tmp;
+
+	if (!stack || !(*stack))
+		return ;
+	tmp = NULL;
+	while (*stack != NULL)
 	{
-		while (argv[k][i] != '\0' || flags[j][i] != '\0' )
-		{
-			if (argv[k][i] != flags[j][i])
-				break ;
-			i++;
-		}
-		if (argv[k][i] == '\0' && flags[j][i] == '\0' )
-			k++;
-		j++;
-		i = 0;
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
 	}
-	return (k - 1);
 }
 
-static int	ft_check_input_split(char *argv_1)
+static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 {
 	int	i;
+	int j;
 	char **input;
 
 	i = 0;
-	input = ft_split(argv_1, ' ');
-	if (!input || input[0] == NULL)
-		return(ft_printf("Error in split : ft_split didnt work or full of ' ' passed as argument\n"), 0);
-	while (input[i] != NULL)
+	j = 0;
+	while (i < n)
 	{
-		if (!ft_is_str_valid(input[i]))
-			return (ft_printf("Error in split : invalid values\n"), 0);
+		input = ft_split(argv[i], ' ');
+		if (!input || input[0] == NULL)
+			return (ft_ps_lstclear(stack), 0);
+		while (input[j] != NULL)
+		{
+			if (!ft_is_str_valid(input[j]))
+				return (free(input), ft_ps_lstclear(stack), 0);
+			if (ft_add_to_stack(stack, ft_atoi(input[j])) == -1)
+				return (free(input), ft_ps_lstclear(stack), 0);
+			j++;
+		}
 		i++;
+		j = 0;
+		free(input[0]);
 	}
-	if (!ft_check_dup(input))
-		return (ft_printf("Error in split : duplicates\n"), 0);
+
+	// print_stack(*stack);
 	return(1);
 }
 
-int	ft_check_input(int argc, char **argv)
+static int ft_create_t_flag(t_flags **flags)
 {
-	int	i;
-	int flags;
-
-	i = 1;
-	flags = 0;
-	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
-		return (ft_printf("Error in first condition\n"), 0);
-	else if (argc == 2)
-	{
-		if (!ft_check_input_split(argv[1]))
-			return (0);
-	}
-	else
-	{
-		flags += ft_flag_checker(argv);
-		i += flags;
-		if (i == argc)
-			return(ft_printf("Error : Only flags present\n"), 0);
-		while (i < argc)
-			if (!ft_is_str_valid(argv[i++]))
-					return (ft_printf("Error : invalid values\n"), 0);
-		if (!ft_check_dup(argv + 1 + flags))
-			return (ft_printf("Error : duplicates \n"), 0);
-	}
+	*flags = malloc(sizeof(t_flags));
+	if (!*flags)
+		return (0);
+	(*flags)->bench = 0;
+	(*flags)->method = 0;
 	return (1);
 }
 
 
-// Testing main for this function
-// int	main(int argc, char **argv)
-// {
-// 	//one function should verify all the conditions for all the
-// 	//arguments, otherwise one argument might not pass the
-// 	//check and it still might work
 
-// 	if (!ft_check_input(argc, argv))
-// 		return (ft_printf("Error\n"), 0);
-// 	return(0);
-// }
+/*
+** Main checker function, it's in charge of:
+**
+** 	- Checking if there are enough arguments passed
+** 	- Checking if there are valid flags present (and if those are the only arguments passed)
+** 	- Sending the remaining arguments to a processing function that splits the strings if necessary,
+** 	  validates the validity of input and adds it to the stack
+** 	- Once all the input arguments are in the stack, the duplicates needs to be verified
+**
+*/
+
+int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
+{
+	int	i;
+	int n_flags;
+
+	i = 1;
+	n_flags = 0;
+	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
+		return (0);
+	else
+	{
+		if (!ft_create_t_flag(flags))
+			return (0);
+		n_flags = ft_flag_checker(argv + 1, argc - 1, *flags);
+		i += n_flags;
+		if (i == argc)
+			return(free(flags), 0);
+		if (!ft_split_validate_add(argv + 1 + n_flags, argc - i, stack))
+			return (free(flags), 0);
+		if (!ft_check_dup(*stack))
+			return (free(flags), 0);
+	}
+	return (1);
+}
+
+// Testing main for this function
+
+int	main(int argc, char **argv)
+{
+	t_stack *stack_a = NULL;
+	t_flags	*flags = NULL;
+
+	if (!ft_check_input(argc, argv, &stack_a, &flags))
+	{
+		return (ft_printf("Error\n"), 0);
+	}
+	ft_ps_lstclear(&stack_a);
+	free(flags);
+	return(0);
+}

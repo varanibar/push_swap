@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/22 10:18:33 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/23 14:31:09 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,31 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 typedef struct s_stack
 {
 	int				val;
 	struct s_stack	*next;
-}					t_stack;
+}	t_stack;
+
+typedef enum e_method
+{
+	NONE,
+	SIMPLE,
+	MEDIUM,
+	COMPLEX,
+	ADAPTATIVE
+}	t_method;
+
+typedef struct s_flags
+{
+	bool		bench;
+	t_method	method;
+}	t_flags;
 
 //validating input
-int					ft_check_input(int argc, char **argv);
+int					ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags);
 
 //Defining the algorithm to use
 double				ft_compute_disorder(t_stack *stack);
