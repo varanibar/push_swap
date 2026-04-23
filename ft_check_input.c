@@ -6,24 +6,12 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/23 15:13:00 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/23 16:37:57 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
-
-// void	print_stack(t_stack *stack)
-// {
-// 	t_stack	*current;
-
-// 	current = stack;
-// 	while (current != NULL)
-// 	{
-// 		ft_printf("%d\n", current->val);
-// 		current = current->next;
-// 	}
-// }
 
 static int	ft_is_str_valid(char *str)
 {
@@ -119,6 +107,16 @@ static int ft_flag_checker(char **input, int n, t_flags *flags)
 	return ((bool)flags->bench + (bool)flags->method);
 }
 
+static int ft_create_t_flag(t_flags **flags)
+{
+	*flags = malloc(sizeof(t_flags));
+	if (!*flags)
+		return (0);
+	(*flags)->bench = 0;
+	(*flags)->method = 0;
+	return (1);
+}
+
 void	ft_ps_lstclear(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -133,12 +131,7 @@ void	ft_ps_lstclear(t_stack **stack)
 		*stack = tmp;
 	}
 }
-// static void	free_input(char **array, int i)
-// {
-// 	while (i > 0)
-// 		free(array[--i]);
-// 	free(array);
-// }
+
 static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 {
 	int	i;
@@ -154,42 +147,34 @@ static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 			return (ft_ps_lstclear(stack), 0);
 		while (input[j] != NULL)
 		{
-			ft_printf("j = %\n",j);
+			ft_printf("j = %d\n",j);
 			if (!ft_is_str_valid(input[j]))
-				return (free(input), ft_ps_lstclear(stack), 0);
+				return (free(input[j]), free(input), 0);
 			if (ft_add_to_stack(stack, ft_atoi(input[j])) == -1)
-				return (free(input), ft_ps_lstclear(stack), 0);
+				return (free(input[j]), free(input), 0);
+			free(input[j]);
 			j++;
 		}
 		i++;
 		j = 0;
 		free(input);
 	}
-
-	// print_stack(*stack);
 	return(1);
 }
 
-static int ft_create_t_flag(t_flags **flags)
-{
-	*flags = malloc(sizeof(t_flags));
-	if (!*flags)
-		return (0);
-	(*flags)->bench = 0;
-	(*flags)->method = 0;
-	return (1);
-}
+
 
 
 
 /*
 ** Main checker function, it's in charge of:
 **
-** 	- Checking if there are enough arguments passed
-** 	- Checking if there are valid flags present (and if those are the only arguments passed)
-** 	- Sending the remaining arguments to a processing function that splits the strings if necessary,
-** 	  validates the validity of input and adds it to the stack
-** 	- Once all the input arguments are in the stack, the duplicates needs to be verified
+** 	- Checks if there are enough arguments passed
+** 	- Creates the node for the flags
+** 	- Checks the flags
+** 	- Sending the remaining arguments to a processing function splits, validates and adds the
+** 	  arguments to the stack
+** 	- Checks the duplicates
 **
 */
 
@@ -209,16 +194,20 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 		n_flags = ft_flag_checker(argv + 1, argc - 1, *flags);
 		i += n_flags;
 		if (i == argc)
-			return(free(flags), 0);
+			return(0);
 		if (!ft_split_validate_add(argv + 1 + n_flags, argc - i, stack))
-			return (free(flags), 0);
+			return (0);
 		if (!ft_check_dup(*stack))
-			return (free(flags), 0);
+			return (0);
 	}
 	return (1);
 }
 
-// Testing main for this function
+/*
+** Testing main for this function, when we call it in the push swap function we need to be careful
+** to clear and free just like here
+**
+*/
 
 int	main(int argc, char **argv)
 {
@@ -227,6 +216,8 @@ int	main(int argc, char **argv)
 
 	if (!ft_check_input(argc, argv, &stack_a, &flags))
 	{
+		ft_ps_lstclear(&stack_a);
+		free(flags);
 		return (ft_printf("Error\n"), 0);
 	}
 	ft_ps_lstclear(&stack_a);
