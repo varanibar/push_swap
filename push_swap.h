@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/23 17:17:29 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/23 17:41:35 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef enum e_method
 	SIMPLE,
 	MEDIUM,
 	COMPLEX,
-	ADAPTATIVE
+	ADAPTIVE
 }	t_method;
 
 typedef struct s_flags
@@ -41,7 +41,6 @@ typedef struct s_flags
 
 //validating input
 int					ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags);
-void				ft_free_stack(t_stack **stack);
 int					ft_flag_strcmp(char *s1, char *s2);
 char				*ft_get_flag_type(int j);
 int					ft_flag_checker(char **input, int n, t_flags *flags);
@@ -52,15 +51,7 @@ double				ft_compute_disorder(t_stack *stack);
 
 //adding nodes to stack
 int					ft_add_to_stack(t_stack **stack, int val);
-
-//operations
-void				del_top(t_stack **stack);
-void				swap(t_stack **stack);
-void				rotate(t_stack **stack);
-void				reverse_rotate(t_stack **stack);
-
-//printing stack
-void				print_stack(t_stack *stack);
+void				ft_free_stack(t_stack **stack);
 
 // operations
 void				sa(t_stack **stack_a);

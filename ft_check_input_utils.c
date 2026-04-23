@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/23 16:48:11 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/23 17:04:40 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/23 17:41:25 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_get_flag_type(int j)
 	methods[1] = "--simple";
 	methods[2] = "--medium";
 	methods[3] = "--complex";
-	methods[4] = "--adaptative";
+	methods[4] = "--adaptive";
 	return (methods[j]);
 }
 
