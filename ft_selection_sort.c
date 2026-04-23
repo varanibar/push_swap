@@ -6,16 +6,16 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 16:57:01 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/23 11:29:04 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/04/23 17:07:30 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-#include "libft.h"
+//special lstsize that uses our struct instead of the one from libft
 
-int	ft_ps_lstsize(t_stack *lst)
+static int	ft_ps_lstsize(t_stack *lst)
 {
 	int	count;
 
@@ -28,7 +28,10 @@ int	ft_ps_lstsize(t_stack *lst)
 	return (count);
 }
 
-int ft_min_index(t_stack *stack)
+//Finds the index of the lowest number in stack_a,
+//min_pos is set to the counter if our current value is smaller then our current minimal.
+
+static int ft_min_index(t_stack *stack)
 {
 	t_stack *current;
 	t_stack *min;
@@ -53,7 +56,12 @@ int ft_min_index(t_stack *stack)
 	return (min_pos);
 }
 
-void ft_move_to_b (t_stack **stack_a, t_stack **stack_b)
+//rotate stack_a until the lowest number is at the top
+//find the shortest route to get lowest number to the top (lowest cost)
+//so if number is in the upper half do ra, if number is in lower half do rra.
+//once lowest number is at top push to b.
+
+static void ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b)
 {
 	int min_pos = ft_min_index(*stack_a);
 	while (ft_min_index(*stack_a) != 0)
@@ -68,11 +76,14 @@ void ft_move_to_b (t_stack **stack_a, t_stack **stack_b)
 	pb (stack_b, stack_a);
 }
 
+//Do ft_rotate_and_move until stack_a is empty and everything is in stack_b
+//then push everything from b back to a.
+
 void ft_selection_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	while (*stack_a != NULL)
 	{
-		ft_move_to_b(stack_a, stack_b);
+		ft_rotate_and_push(stack_a, stack_b);
 	}
 	while (*stack_b != NULL)
 	{
@@ -103,5 +114,7 @@ void ft_selection_sort(t_stack **stack_a, t_stack **stack_b)
 // 	ft_selection_sort(&stack_a, &stack_b);
 // 	ft_printf("%s\n", "stack_a:");
 // 	print_stack(stack_a);
+// 	ft_free_stack(&stack_a);
+// 	ft_free_stack(&stack_b);
 // 	return (0);
 // }
