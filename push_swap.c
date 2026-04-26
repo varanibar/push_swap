@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/18 13:51:14 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/26 15:07:59 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 18:34:55 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,34 @@ int	main(int argc, char **argv)
 		free(flags);
 		return (ft_printf("Error\n"), 0);
 	}
-	ft_printf("Stack_a\n");
-	print_stack(stack_a);
+	// ft_printf("Stack_a\n");
+	// print_stack(stack_a);
+
 	disorder = ft_compute_disorder(stack_a);
-	ft_printf("disorder metric = %d\n", disorder);
-	ft_printf("%s\n", "operations used:");
-	ft_selection_sort(&stack_a, &stack_b);
-	ft_printf("%s\n", "stack_a:");
-	print_stack(stack_a);
-	print_stack(stack_b);
-	ft_free_stack(&stack_a);
-	free(flags);
-	return (0);
+	if (!disorder)
+		return (ft_free_stack(&stack_a), free(flags), 0);
+
+
+	if (flags->method == 1)
+		ft_selection_sort(&stack_a, &stack_b);
+	// else if (flags->method == 2)
+	// 	ft_selection_sort(&stack_a, &stack_b);
+	else
+		ft_selection_sort(&stack_a, &stack_b);
+
+
+	if (flags->bench == 1)
+		write(2,"[bench]",7);
+
+	return (ft_free_stack(&stack_a), free(flags), 0);
 }
 
+/*
+** TO DO :
+** 	-ft_compute_disorder needs to return a decimal number, i changed it to int bc ft_printf cant print it for now
+** 	-ft_printf: add a specifier to print decimal numbers
+** 	-create ft_fprintf: this one would allow us to print to any
+** 	 file descriptor (like STDERR for the --bench flag)
+** 	-modify operations so each one has a counter that will be used when using --bench
+**
+*/
