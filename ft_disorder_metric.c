@@ -6,38 +6,58 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/26 12:10:59 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 14:18:38 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
-double	ft_compute_disorder(t_stack *stack)
+int	ft_compute_disorder(t_stack *current)
 {
-	double	mistakes;
-	double	total_pairs;
+	int	mistakes;
+	int	pairs;
 	int	i;
-	t_stack *current;
+	int	size;
 	t_stack *next;
 
 	mistakes = 0;
-	total_pairs = 0;
+	pairs = 0;
 	i = 0;
-	current = stack;
-	while (current != NULL)
+	size = ft_stack_size(current);
+	while (i < size - 1)
 	{
 		if (i != 0)
 			current = current->next;
 		next = current->next;
 		while (next != NULL)
 		{
-			total_pairs += 1;
-			if (current->val > next->val)
+			pairs += 1;
+			if (current->val < next->val)
 				mistakes += 1;
 			next = next->next;
 		}
 		i++;
 	}
-	return (mistakes / total_pairs);
+	return ((mistakes * 100 / pairs));
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	t_stack	*stack_a;
+// 	t_flags	*flags;
+// 	int disorder;
+
+// 	stack_a = NULL;
+// 	flags = NULL;
+// 	if (!ft_check_input(argc, argv, &stack_a, &flags))
+// 	{
+// 		ft_free_stack(&stack_a);
+// 		free(flags);
+// 		return (ft_printf("Error\n"), 0);
+// 	}
+// 	disorder = ft_compute_disorder(stack_a);
+// 	ft_printf("disorder metric = %d\n", disorder);
+// 	ft_free_stack(&stack_a);
+// 	free(flags);
+// 	return (0);
+// }
