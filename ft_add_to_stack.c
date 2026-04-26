@@ -6,11 +6,40 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 14:14:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/22 09:13:52 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 14:58:17 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_stack	*ft_ps_lstlast(t_stack *stack)
+{
+	t_stack	*last_node;
+
+	if (!stack)
+		return (NULL);
+	last_node = stack;
+	while (last_node->next != NULL)
+	{
+		last_node = last_node->next;
+	}
+	return (last_node);
+}
+
+void	ft_ps_lstadd_back(t_stack **stack, t_stack *new)
+{
+	t_stack	*last;
+
+	if (!stack)
+		return ;
+	if (*stack == NULL)
+	{
+		*stack = new;
+		return ;
+	}
+	last = ft_ps_lstlast(*stack);
+	last->next = new;
+}
 
 int	ft_add_to_stack(t_stack **stack, int val)
 {
@@ -20,7 +49,7 @@ int	ft_add_to_stack(t_stack **stack, int val)
 	if (!new_node)
 		return(-1);
 	new_node->val = val;
-	new_node->next = *stack;
-	*stack = new_node;
+	new_node->next = NULL;
+	ft_ps_lstadd_back(stack, new_node);
 	return(1);
 }

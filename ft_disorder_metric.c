@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/26 14:18:38 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 14:35:08 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_compute_disorder(t_stack *current)
 		while (next != NULL)
 		{
 			pairs += 1;
-			if (current->val < next->val)
+			if (current->val > next->val)
 				mistakes += 1;
 			next = next->next;
 		}
