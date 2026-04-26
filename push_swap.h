@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/23 17:41:35 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 14:16:46 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ int					ft_flag_checker(char **input, int n, t_flags *flags);
 int					ft_create_t_flag(t_flags **flags);
 
 //Defining the algorithm to use
-double				ft_compute_disorder(t_stack *stack);
+int					ft_compute_disorder(t_stack *current);
 
 //adding nodes to stack
 int					ft_add_to_stack(t_stack **stack, int val);
 void				ft_free_stack(t_stack **stack);
+int					ft_stack_size(t_stack *stack);
 
 // operations
 void				sa(t_stack **stack_a);

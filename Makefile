@@ -4,6 +4,7 @@ SRCS = push_swap.c \
 	ft_check_input.c \
 	ft_check_input_utils.c \
 	ft_free_stack.c \
+	ft_stack_size.c \
 	ft_rotate_operation.c \
 	ft_push_operation.c \
 	ft_selection_sort.c \
