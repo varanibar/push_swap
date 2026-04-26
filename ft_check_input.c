@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/23 17:08:10 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 11:35:44 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,20 +123,20 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 **
 */
 
-int	main(int argc, char **argv)
-{
-	t_stack	*stack_a;
-	t_flags	*flags;
+// int	main(int argc, char **argv)
+// {
+// 	t_stack	*stack_a;
+// 	t_flags	*flags;
 
-	stack_a = NULL;
-	flags = NULL;
-	if (!ft_check_input(argc, argv, &stack_a, &flags))
-	{
-		ft_free_stack(&stack_a);
-		free(flags);
-		return (ft_printf("Error\n"), 0);
-	}
-	ft_free_stack(&stack_a);
-	free(flags);
-	return (0);
-}
+// 	stack_a = NULL;
+// 	flags = NULL;
+// 	if (!ft_check_input(argc, argv, &stack_a, &flags))
+// 	{
+// 		ft_free_stack(&stack_a);
+// 		free(flags);
+// 		return (ft_printf("Error\n"), 0);
+// 	}
+// 	ft_free_stack(&stack_a);
+// 	free(flags);
+// 	return (0);
+// }
