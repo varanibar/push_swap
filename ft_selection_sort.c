@@ -6,27 +6,12 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 16:57:01 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/23 17:07:30 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/04/26 14:25:52 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
-
-//special lstsize that uses our struct instead of the one from libft
-
-static int	ft_ps_lstsize(t_stack *lst)
-{
-	int	count;
-
-	count = 0;
-	while (lst != NULL)
-	{
-		count++;
-		lst = lst->next;
-	}
-	return (count);
-}
 
 //Finds the index of the lowest number in stack_a,
 //min_pos is set to the counter if our current value is smaller then our current minimal.
@@ -44,7 +29,7 @@ static int ft_min_index(t_stack *stack)
 
 	while (current != NULL)
 	{
-	
+
 		if (current->val < min->val)
 		{
 			min = current;
@@ -66,7 +51,7 @@ static void ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b)
 	int min_pos = ft_min_index(*stack_a);
 	while (ft_min_index(*stack_a) != 0)
 	{
-		int stack_size = ft_ps_lstsize(*stack_a);
+		int stack_size = ft_stack_size(*stack_a);
 		min_pos = ft_min_index(*stack_a);
 		if (min_pos <= (stack_size / 2))
 			ra(stack_a);
