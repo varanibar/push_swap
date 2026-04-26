@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/22 09:15:19 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 12:10:59 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	ft_compute_disorder(t_stack *stack)
 	total_pairs = 0;
 	i = 0;
 	current = stack;
-	while (i < ft_lstsize(stack) - 1)
+	while (current != NULL)
 	{
 		if (i != 0)
 			current = current->next;
