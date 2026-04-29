@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/29 14:42:01 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/29 16:30:16 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/29 16:36:10 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_print_float(double nbr, const char *specif)
 		count += ft_putnbr_b(decimal_number, "0123456789");
 		if (decimal_number == 0)
 			while (--precision > 0)
-				count += write(1, "0",1);
+				count += write(1, "0", 1);
 	}
 	return (count);
 }
