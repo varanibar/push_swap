@@ -6,14 +6,13 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/22 10:18:23 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/26 13:56:01 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
-//check if we have valid characters in the string
-//we should only have integers, one sing
+
 static int	ft_is_str_valid(char *str)
 {
 	int	i;
@@ -28,124 +27,116 @@ static int	ft_is_str_valid(char *str)
 	return (0);
 }
 
-//check for duplicates
-static int	ft_check_dup(char **input)
+static int	ft_check_dup(t_stack *stack)
 {
-	int	i;
-	int	j;
+	int		i;
+	t_stack	*current;
+	t_stack	*next;
 
 	i = 0;
-	while (input[i])
+	current = stack;
+	while (current != NULL && current->next != NULL)
 	{
-		j = i + 1;
-		while (input[j])
+		if (i != 0)
+			current = current->next;
+		next = current->next;
+		while (next != NULL)
 		{
-			if (ft_atoi(input[i]) == ft_atoi(input[j]))
+			if (current->val == next->val)
 				return (0);
-			j++;
+			next = next->next;
 		}
 		i++;
 	}
 	return (1);
 }
-//There if something isnt valid, this function will return 1 which
-//will signal to the whole program that it needs to stop
-//There are three possible cases :
-//	-argc is one, no arguments to work with, error
-//	-argc is two, then the second argument must be the argument
-//	   that contains all the numbers in a string, so we need to first
-//	   split it using ft split and then pass the split arguments to
-//	   the next check. If it is not this string (like just a flag)
-//	   then error.
-//	-argc is more than two, the point to check here is that we can
-//	   maybe have argv[1] and argv[2] as flags, so in case those
-//	   arent valid, we need to see if they are not valid because
-//	   they are actually flags. we need to use something like strcmp
 
-
-static int ft_flag_checker(char **argv)
+static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 {
 	int		i;
 	int		j;
-	char	*flags[5] = {"--bench", "--simple", "--medium", "--complex", "--adaptative"};
-	int k;
+	char	**input;
+
 	i = 0;
 	j = 0;
-	k = 1;
-	while (j < 5 && k < 3)
+	while (i < n)
 	{
-		while (argv[k][i] != '\0' || flags[j][i] != '\0' )
+		input = ft_split(argv[i], ' ');
+		if (!input || input[0] == NULL)
+			return (ft_free_stack(stack), 0);
+		while (input[j] != NULL)
 		{
-			if (argv[k][i] != flags[j][i])
-				break ;
-			i++;
+			if (!ft_is_str_valid(input[j]))
+				return (free(input[j]), free(input), 0);
+			if (ft_add_to_stack(stack, ft_atoi(input[j])) == -1)
+				return (free(input[j]), free(input), 0);
+			free(input[j]);
+			j++;
 		}
-		if (argv[k][i] == '\0' && flags[j][i] == '\0' )
-			k++;
-		j++;
-		i = 0;
-	}
-	return (k - 1);
-}
-
-static int	ft_check_input_split(char *argv_1)
-{
-	int	i;
-	char **input;
-
-	i = 0;
-	input = ft_split(argv_1, ' ');
-	if (!input || input[0] == NULL)
-		return(ft_printf("Error in split : ft_split didnt work or full of ' ' passed as argument\n"), 0);
-	while (input[i] != NULL)
-	{
-		if (!ft_is_str_valid(input[i]))
-			return (ft_printf("Error in split : invalid values\n"), 0);
 		i++;
+		j = 0;
+		free(input);
 	}
-	if (!ft_check_dup(input))
-		return (ft_printf("Error in split : duplicates\n"), 0);
-	return(1);
+	return (1);
 }
+/*
+** Main checker function, it's in charge of:
+**
+** 	- Checks if there are enough arguments passed
+** 	- Creates the node for the flags
+** 	- Checks the flags
+** 	- Sending the remaining arguments to a processing function splits,
+** 	  validates and adds the arguments to the stack
+** 	- Checks the duplicates
+**
+*/
 
-int	ft_check_input(int argc, char **argv)
+int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 {
 	int	i;
-	int flags;
+	int	n_flags;
 
 	i = 1;
-	flags = 0;
+	n_flags = 0;
 	if (argc == 1 || (argc == 2 && argv[1][0] == '\0'))
-		return (ft_printf("Error in first condition\n"), 0);
-	else if (argc == 2)
-	{
-		if (!ft_check_input_split(argv[1]))
-			return (0);
-	}
+		return (0);
 	else
 	{
-		flags += ft_flag_checker(argv);
-		i += flags;
+		if (!ft_create_t_flag(flags))
+			return (0);
+		n_flags = ft_flag_checker(argv + 1, argc - 1, *flags);
+		i += n_flags;
 		if (i == argc)
-			return(ft_printf("Error : Only flags present\n"), 0);
-		while (i < argc)
-			if (!ft_is_str_valid(argv[i++]))
-					return (ft_printf("Error : invalid values\n"), 0);
-		if (!ft_check_dup(argv + 1 + flags))
-			return (ft_printf("Error : duplicates \n"), 0);
+			return (0);
+		if (!ft_split_validate_add(argv + 1 + n_flags, argc - i, stack))
+			return (0);
+		if (!ft_check_dup(*stack))
+			return (0);
 	}
 	return (1);
 }
 
+/*
+** Testing main for this function, when we call it in the
+** push swap function we need to be careful
+** to clear and free just like here
+**
+*/
 
-// Testing main for this function
 // int	main(int argc, char **argv)
 // {
-// 	//one function should verify all the conditions for all the
-// 	//arguments, otherwise one argument might not pass the
-// 	//check and it still might work
+// 	t_stack	*stack_a;
+// 	t_flags	*flags;
 
-// 	if (!ft_check_input(argc, argv))
+// 	stack_a = NULL;
+// 	flags = NULL;
+// 	if (!ft_check_input(argc, argv, &stack_a, &flags))
+// 	{
+// 		ft_free_stack(&stack_a);
+// 		free(flags);
 // 		return (ft_printf("Error\n"), 0);
-// 	return(0);
+// 	}
+// 	ft_free_stack(&stack_a);
+// 	free(flags);
+// 	return (0);
 // }

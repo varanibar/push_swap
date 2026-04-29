@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_reverse_operation.c                             :+:    :+:            */
+/*   ft_rotate_operation.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 14:17:58 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/22 17:26:38 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/04/29 13:03:14 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,25 @@ static void	rotate(t_stack **stack)
 	(*stack)->next = NULL;
 	*stack = second;
 }
-void	ra(t_stack **stack_a)
+void	ra(t_stack **stack_a, t_ops *counter)
 {
 	rotate(stack_a);
+	counter->ra++;
 	ft_printf("%s\n", "ra");
 }
 
-void	rb(t_stack **stack_b)
+void	rb(t_stack **stack_b, t_ops *counter)
 {
 	rotate(stack_b);
+	counter->rb++;
 	ft_printf("%s\n", "rb");
 }
 
-void	rr(t_stack **stack_a, t_stack **stack_b)
+void	rr(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
 {
 	rotate(stack_a);
 	rotate(stack_b);
+	counter->rr++;
 	ft_printf("%s\n", "rr");
 }
 // int	main(void)

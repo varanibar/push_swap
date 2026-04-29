@@ -3,41 +3,61 @@
 /*                                                        ::::::::            */
 /*   ft_disorder_metric.c                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
+/*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/22 15:49:22 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/04/26 14:35:08 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
-// double	ft_compute_disorder(t_stack *stack)
+int	ft_compute_disorder(t_stack *current)
+{
+	int	mistakes;
+	int	pairs;
+	int	i;
+	int	size;
+	t_stack *next;
+
+	mistakes = 0;
+	pairs = 0;
+	i = 0;
+	size = ft_stack_size(current);
+	while (i < size - 1)
+	{
+		if (i != 0)
+			current = current->next;
+		next = current->next;
+		while (next != NULL)
+		{
+			pairs += 1;
+			if (current->val > next->val)
+				mistakes += 1;
+			next = next->next;
+		}
+		i++;
+	}
+	return ((mistakes * 100 / pairs));
+}
+
+// int	main(int argc, char **argv)
 // {
-// 	double	mistakes;
-// 	double	total_pairs;
-// 	int	i;
-// 	t_stack *current;
-// 	t_stack *next;
+// 	t_stack	*stack_a;
+// 	t_flags	*flags;
+// 	int disorder;
 
-// 	mistakes = 0;
-// 	total_pairs = 0;
-// 	i = 0;
-// 	current = stack;
-// 	while (i < ft_lstsize(stack) - 1)
+// 	stack_a = NULL;
+// 	flags = NULL;
+// 	if (!ft_check_input(argc, argv, &stack_a, &flags))
 // 	{
-// 		if (i != 0)
-// 			current = current->next;
-// 		next = current->next;
-// 		while (next != NULL)
-// 		{
-// 			total_pairs += 1;
-// 			if (current->val > next->val)
-// 				mistakes += 1;
-// 			next = next->next;
-// 		}
-// 		i++;
+// 		ft_free_stack(&stack_a);
+// 		free(flags);
+// 		return (ft_printf("Error\n"), 0);
 // 	}
-// 	return (mistakes / total_pairs);
+// 	disorder = ft_compute_disorder(stack_a);
+// 	ft_printf("disorder metric = %d\n", disorder);
+// 	ft_free_stack(&stack_a);
+// 	free(flags);
+// 	return (0);
 // }
