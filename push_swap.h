@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/29 16:47:36 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/01 16:46:41 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_stack
 {
 	int				val;
+	int				rank;
 	struct s_stack	*next;
 }	t_stack;
 
