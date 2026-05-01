@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_add_to_stack.c                                  :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
+/*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 14:14:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/26 14:58:17 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/01 14:07:32 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	ft_add_to_stack(t_stack **stack, int val)
 	if (!new_node)
 		return(-1);
 	new_node->val = val;
+	new_node->rank = -1;
 	new_node->next = NULL;
 	ft_ps_lstadd_back(stack, new_node);
 	return(1);

@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/29 13:01:29 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/05/01 16:49:40 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_stack
 {
 	int				val;
+	int				rank;
 	struct s_stack	*next;
 }					t_stack;
 
@@ -39,7 +40,6 @@ typedef struct s_flags
 	t_method		method;
 }					t_flags;
 
-// counting operations
 typedef struct s_ops
 {
 	int				sa;
@@ -64,12 +64,13 @@ int					ft_flag_checker(char **input, int n, t_flags *flags);
 int					ft_create_t_flag(t_flags **flags);
 
 // Defining the algorithm to use
-int					ft_compute_disorder(t_stack *current);
+float				ft_compute_disorder(t_stack *current);
 
 // adding nodes to stack
 int					ft_add_to_stack(t_stack **stack, int val);
 void				ft_free_stack(t_stack **stack);
 int					ft_stack_size(t_stack *stack);
+void				ft_assign_rank(t_stack **stack);
 
 // operations
 void				sa(t_stack **stack_a, t_ops *counter);
