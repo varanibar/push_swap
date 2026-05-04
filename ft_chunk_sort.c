@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/30 15:30:30 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/01 16:49:58 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/05/04 10:49:56 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 // am gonna use this later to decide how many chunks to create
 
-static int	ft_sqrt(int nb)
-{
-	int	n;
+// static int	ft_sqrt(int nb)
+// {
+// 	int	n;
 
-	n = 1;
-	while (n * n <= nb)
-	{
-		if (n * n == nb)
-			return (n);
-		n++;
-	}
-	return (n - 1);
-}
+// 	n = 1;
+// 	while (n * n <= nb)
+// 	{
+// 		if (n * n == nb)
+// 			return (n);
+// 		n++;
+// 	}
+// 	return (n - 1);
+// }
 
 // finds the node with the lowest value in the stack
 // that did not get a rank yet. Rank is set to -1 by default (in add_to_stack)
@@ -62,7 +62,7 @@ void	ft_assign_rank(t_stack **stack)
 	i = 0;
 	while (i < size)
 	{
-		min = find_min(*stack);
+		min = ft_find_min(*stack);
 		min->rank = i;
 		i++;
 	}
