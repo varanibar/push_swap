@@ -6,14 +6,14 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/04 12:50:42 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 12:50:50 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 12:53:21 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-void	print_rank(t_stack *stack)
+void	print_stack(t_stack *stack)
 {
 	t_stack	*current;
 
