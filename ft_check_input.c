@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/04 12:26:08 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 15:29:22 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ static int	ft_check_dup(t_stack *stack)
 	return (1);
 }
 
+static void	ft_free_array(char **input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i] != NULL)
+	{
+		free(input[i]);
+		i++;
+	}
+	free(input);
+}
+
 static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 {
 	int		i;
@@ -67,15 +80,14 @@ static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 		while (input[j] != NULL)
 		{
 			if (!ft_is_str_valid(input[j]))
-				return (free(input[j]), free(input), 0);
+				return (ft_free_array(input), 0);
 			if (ft_add_to_stack(stack, ft_atoi(input[j])) == -1)
-				return (free(input[j]), free(input), 0);
-			free(input[j]);
+				return (ft_free_array(input), 0);
 			j++;
 		}
 		i++;
 		j = 0;
-		free(input);
+		ft_free_array(input);
 	}
 	return (1);
 }
