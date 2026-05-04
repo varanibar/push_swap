@@ -6,16 +6,16 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/26 14:35:08 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/04/29 15:28:44 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_compute_disorder(t_stack *current)
+float	ft_compute_disorder(t_stack *current)
 {
-	int	mistakes;
-	int	pairs;
+	float	mistakes;
+	float	pairs;
 	int	i;
 	int	size;
 	t_stack *next;

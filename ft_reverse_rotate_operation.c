@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:35:33 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/29 13:00:35 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/04/29 16:42:20 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	reverse_rotate(t_stack **stack)
 	prev->next = NULL;
 	*stack = current;
 }
+
 void	rra(t_stack **stack_a, t_ops *counter)
 {
 	reverse_rotate(stack_a);
@@ -52,6 +53,7 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
 	counter->rrr++;
 	ft_printf("%s\n", "rrr");
 }
+
 // int	main(void)
 // {
 // 	t_stack	*stack_a;

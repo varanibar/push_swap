@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 14:11:32 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/29 12:49:46 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/04/29 16:41:52 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ void	pb(t_stack **stack_b, t_stack **stack_a, t_ops *counter)
 // {
 // 	t_stack *stack_a;
 // 	t_stack *stack_b;
-// 	t_ops counter = {0};
 // 	int i;
 // 	int j;
-	
+
 // 	stack_a = NULL;
 // 	stack_b = NULL;
 // 	i = 4;
@@ -70,7 +69,7 @@ void	pb(t_stack **stack_b, t_stack **stack_a, t_ops *counter)
 // 	ft_printf("%s\n", "stack_b before operation:");
 // 	print_stack(stack_b);
 // 	// pa(&stack_a, &stack_b);
-// 	pb(&stack_b, &stack_a, &counter);
+// 	pb(&stack_b, &stack_a);
 // 	ft_printf("%s\n", "stack_a after operation:");
 // 	print_stack(stack_a);
 // 	ft_printf("%s\n", "stack_b after operation:");

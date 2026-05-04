@@ -1,0 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   print_stack.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/05/04 12:50:42 by varaniba      #+#    #+#                 */
+/*   Updated: 2026/05/04 12:53:21 by varaniba      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+#include "libft.h"
+
+void	print_stack(t_stack *stack)
+{
+	t_stack	*current;
+
+	current = stack;
+	while (current != NULL)
+	{
+		ft_printf("%d\n", current->val);
+		current = current->next;
+	}
+}

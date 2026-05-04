@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/01 16:49:40 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/05/04 16:53:28 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef struct s_flags
 	t_method		method;
 }					t_flags;
 
+typedef struct s_bounds
+{
+	int				min;
+	int				max;
+	int				size;
+}					t_bounds;
+
 typedef struct s_ops
 {
 	int				sa;
@@ -55,13 +62,16 @@ typedef struct s_ops
 	int				rrr;
 }					t_ops;
 
+// initializing variables
+int					ft_init_t_counter(t_ops **counter);
+int					ft_init_t_flags(t_flags **flags);
+
 // validating input
 int					ft_check_input(int argc, char **argv, t_stack **stack,
 						t_flags **flags);
 int					ft_flag_strcmp(char *s1, char *s2);
 char				*ft_get_flag_type(int j);
 int					ft_flag_checker(char **input, int n, t_flags *flags);
-int					ft_create_t_flag(t_flags **flags);
 
 // Defining the algorithm to use
 float				ft_compute_disorder(t_stack *current);
@@ -87,10 +97,22 @@ void				rrr(t_stack **stack_a, t_stack **stack_b, t_ops *counter);
 
 // printing stack DELETE THIS BEFORE SUBMITTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 void				print_stack(t_stack *stack);
+void				print_rank(t_stack *stack);
 
 // sorting functions
 void				ft_selection_sort(t_stack **stack_a, t_stack **stack_b,
 						t_ops *counter);
+void				ft_chunk_sort(t_stack **stack_a, t_stack **stack_b,
+						t_ops *counter);
+void				ft_radix_sort(t_stack **stack_a, t_stack **stack_b,
+						t_ops *counter);
+
+// chunk sort utils
+int					ft_sqrt(int nb);
+int					ft_max_index(t_stack *stack_b);
+void				ft_assign_rank(t_stack **stack);
+int					ft_find_chunk_index(t_stack **stack_a, int chunk_min,
+						int chunk_max);
 
 // helper functions (we should fetch them from libft)
 // int					ft_atoi(const char *nptr);

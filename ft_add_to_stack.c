@@ -3,16 +3,16 @@
 /*                                                        ::::::::            */
 /*   ft_add_to_stack.c                                  :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
+/*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 14:14:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/01 14:07:32 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/05/04 10:16:03 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_ps_lstlast(t_stack *stack)
+static t_stack	*ft_ps_lstlast(t_stack *stack)
 {
 	t_stack	*last_node;
 
@@ -26,7 +26,7 @@ t_stack	*ft_ps_lstlast(t_stack *stack)
 	return (last_node);
 }
 
-void	ft_ps_lstadd_back(t_stack **stack, t_stack *new)
+static void	ft_ps_lstadd_back(t_stack **stack, t_stack *new)
 {
 	t_stack	*last;
 
