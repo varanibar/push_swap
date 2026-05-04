@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/01 15:33:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 12:13:38 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 15:56:54 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,66 @@ static int	ft_bits(t_stack *stack)
 	return (bits);
 }
 
+static void	ft_process_one_bit(t_stack **stack_a, t_stack **stack_b,
+	t_ops *counter, int bit_position)
+{
+	int		checked;
+	int		size;
+
+	checked = 0;
+	size = ft_stack_size(*stack_a);
+	while (*stack_a != NULL && checked++ < size)
+	{
+		if ((((*stack_a)->rank >> bit_position) & 1) == 0)
+			pb(stack_b, stack_a, counter);
+		else
+			ra(stack_a, counter);
+	}
+	while (*stack_b != NULL)
+		pa(stack_a, stack_b, counter);
+}
+
+static int	ft_is_stack_sorted(t_stack **stack_a)
+{
+	t_stack	*current;
+	t_stack	*next;
+	int		size;
+	int		i;
+
+	current = *stack_a;
+	next = NULL;
+	size = ft_stack_size(*stack_a);
+	i = 0;
+	while (i < size - 1)
+	{
+		next = current->next;
+		if (current->val > next->val)
+			return (0);
+		current = next;
+		i++;
+	}
+	return (1);
+}
+
 //function too long : either create another f(x) or reate another struct
 void	ft_radix_sort(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
 {
 	int		bit_position;
-	t_stack	*current;
-	t_stack	*next;
 	int		checked;
-	int		size;
+	int		bits;
 
 	bit_position = 0;
-	current = NULL;
-	next = NULL;
 	checked = 0;
-	size = ft_stack_size(*stack_a);
+	bits = ft_bits(*stack_a);
 	ft_assign_rank(stack_a);
-	while (bit_position < ft_bits(*stack_a))
+	while (bit_position < bits)
 	{
-		current = *stack_a;
-		checked = 0;
-		while (current->next != NULL && checked++ < size)
-		{
-			next = current->next;
-			if (((current->rank >> bit_position) & 1) == 0)
-				pb(stack_b, stack_a, counter);
-			else
-				ra(stack_a, counter);
-			current = next;
-		}
-		while (*stack_b != NULL)
-			pa(stack_a, stack_b, counter);
+		ft_process_one_bit(stack_a, stack_b, counter, bit_position);
+		if (ft_is_stack_sorted(stack_a) == 1)
+			break ;
 		bit_position++;
 	}
 }
-
 
 // int	main(void)
 // {
