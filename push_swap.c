@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/18 13:51:14 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 12:36:26 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 15:20:56 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	main(int argc, char **argv)
 
 	if (!ft_init_variables(&stack_a, &stack_b, &flags, &counter))
 		return(0);
-	if (!ft_check_input(argc, argv, &stack_a, &flags) || ft_stack_size(stack_a) == 1)
+	if (!ft_check_input(argc, argv, &stack_a, &flags))
 		return (ft_printf("Error\n"), ft_free_all(&stack_a, &flags, &counter), 0);
-	// if (ft_stack_size(stack_a) == 1)
-	// 	return (ft_printf("Error\n"), ft_free_stack(&stack_a), free(flags), free(counter), 0);
+	if (ft_stack_size(stack_a) == 1)
+		return (ft_printf("Error\n"), ft_free_all(&stack_a, &flags, &counter), 0);
 	disorder = ft_compute_disorder(stack_a);
 	if (!disorder)
 		return (ft_free_all(&stack_a, &flags, &counter), 0);

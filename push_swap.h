@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 10:53:50 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 17:05:58 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,5 @@ void				print_rank(t_stack *stack);
 // sorting functions
 void				ft_selection_sort(t_stack **stack_a, t_stack **stack_b, t_ops *counter);
 void				ft_radix_sort(t_stack **stack_a, t_stack **stack_b, t_ops *counter);
-
-//helper functions (we should fetch them from libft)
-// int					ft_atoi(const char *nptr);
 
 #endif
