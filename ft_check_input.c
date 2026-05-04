@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/04 10:09:08 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 12:26:08 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 		return (0);
 	else
 	{
-		if (!ft_init_t_flags(flags))
-			return (0);
 		n_flags = ft_flag_checker(argv + 1, argc - 1, *flags);
 		i += n_flags;
 		if (i == argc)
@@ -112,6 +110,7 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 			return (0);
 		if (!ft_check_dup(*stack))
 			return (0);
+
 	}
 	return (1);
 }
