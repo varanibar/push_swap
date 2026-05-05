@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/23 16:48:11 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 09:49:16 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 11:49:26 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ int	ft_flag_checker(char **input, int n, t_flags *flags)
 	}
 	return ((bool)flags->bench + (bool)flags->method);
 }
-

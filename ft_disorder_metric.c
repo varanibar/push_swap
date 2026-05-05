@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:23:07 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/29 15:28:44 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 11:49:02 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ float	ft_compute_disorder(t_stack *current)
 {
 	float	mistakes;
 	float	pairs;
-	int	i;
-	int	size;
-	t_stack *next;
+	int		i;
+	int		size;
+	t_stack	*next;
 
 	mistakes = 0;
 	pairs = 0;
