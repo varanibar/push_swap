@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/09 14:31:51 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 11:31:00 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 11:45:05 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_printf(const char *format_str, ...)
 			if (!ft_check_format(&format_str[i + 1], &counter))
 				break ;
 			counter += ft_print_format(&format_str[++i], arg);
-			offset(&format_str[i], &i);
+			ft_offset(&format_str[i], &i);
 		}
 		else
 			counter += write(1, &format_str[i], 1);
