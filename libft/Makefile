@@ -45,7 +45,10 @@ SRCS = ft_isalpha.c \
 	ft_lstmap.c \
 	ft_printf.c \
 	ft_printf_utils.c \
-	ft_printf_additional_specifier.c
+	ft_printf_additional_specifier.c \
+	ft_e_printf.c \
+	ft_e_printf_utils.c \
+	ft_e_printf_additional_specifier.c
 
 OBJS = $(SRCS:.c=.o)
 
