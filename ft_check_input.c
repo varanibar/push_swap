@@ -6,14 +6,14 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/05 14:20:17 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 15:40:29 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-static int	ft_is_str_valid(char *str)
+static int	ft_check_chars(char *str)
 {
 	int	i;
 
@@ -25,6 +25,62 @@ static int	ft_is_str_valid(char *str)
 	if (str[i] == '\0')
 		return (1);
 	return (0);
+}
+
+static int	ft_check_limits(char *str)
+{
+	int		i;
+	long	nbr;
+	int		sign;
+	long	limit;
+
+	i = 0;
+	nbr = 0;
+	sign = 1;
+	limit = INT_MAX;
+	if (str[i] == '-')
+	{
+		sign = -sign;
+		i++;
+		limit += 1;
+	}
+	while (ft_isdigit(str[i]))
+	{
+		nbr = nbr * 10 + (str[i] - '0');
+		i++;
+	}
+	if (nbr > limit)
+		return (0);
+	return (1);
+}
+
+static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
+{
+	int		i;
+	int		j;
+	char	**input;
+
+	i = 0;
+	while (i < n)
+	{
+		j = 0;
+		input = ft_split(argv[i++], ' ');
+		if (!input)
+			return (0);
+		else if (input[0] == NULL)
+			return (ft_free_array(input), 0);
+		while (input[j] != NULL)
+		{
+			if (!ft_check_chars(input[j]))
+				return (ft_free_array(input), 0);
+			if (!ft_check_limits(input[j]))
+				return (ft_free_array(input), 0);
+			if (ft_add_to_stack(stack, ft_atoi(input[j++])) == -1)
+				return (ft_free_array(input), 0);
+		}
+		ft_free_array(input);
+	}
+	return (1);
 }
 
 static int	ft_check_dup(t_stack *stack)
@@ -47,48 +103,6 @@ static int	ft_check_dup(t_stack *stack)
 			next = next->next;
 		}
 		i++;
-	}
-	return (1);
-}
-
-static void	ft_free_array(char **input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i] != NULL)
-	{
-		free(input[i]);
-		i++;
-	}
-	free(input);
-}
-
-static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
-{
-	int		i;
-	int		j;
-	char	**input;
-
-	i = 0;
-	while (i < n)
-	{
-		j = 0;
-		input = ft_split(argv[i], ' ');
-		if (!input)
-			return (0);
-		else if (input[0] == NULL)
-			return (ft_free_array(input), 0);
-		while (input[j] != NULL)
-		{
-			if (!ft_is_str_valid(input[j]))
-				return (ft_free_array(input), 0);
-			if (ft_add_to_stack(stack, ft_atoi(input[j])) == -1)
-				return (ft_free_array(input), 0);
-			j++;
-		}
-		i++;
-		ft_free_array(input);
 	}
 	return (1);
 }

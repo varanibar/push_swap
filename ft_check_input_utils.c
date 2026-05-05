@@ -6,12 +6,25 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/23 16:48:11 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 11:49:26 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 15:40:48 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
+
+void	ft_free_array(char **input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i] != NULL)
+	{
+		free(input[i]);
+		i++;
+	}
+	free(input);
+}
 
 int	ft_flag_strcmp(char *s1, char *s2)
 {

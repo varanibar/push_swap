@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 12:36:39 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 15:41:30 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int					ft_init_t_flags(t_flags **flags);
 
 //validating input
 int					ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags);
+void				ft_free_array(char **input);
 int					ft_flag_strcmp(char *s1, char *s2);
 char				*ft_get_flag_type(int j);
 int					ft_flag_checker(char **input, int n, t_flags *flags);
