@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/05 15:40:29 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/06 00:01:38 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 				return (ft_free_array(input), 0);
 			if (!ft_check_limits(input[j]))
 				return (ft_free_array(input), 0);
-			if (ft_add_to_stack(stack, ft_atoi(input[j++])) == -1)
+			if (!ft_add_to_stack(stack, ft_atoi(input[j++])))
 				return (ft_free_array(input), 0);
 		}
 		ft_free_array(input);
@@ -107,7 +107,7 @@ static int	ft_check_dup(t_stack *stack)
 	return (1);
 }
 
-int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
+int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags *flags)
 {
 	int	i;
 	int	n_flags;
@@ -118,7 +118,7 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 		return (0);
 	else
 	{
-		n_flags = ft_flag_checker(argv + 1, argc - 1, *flags);
+		n_flags = ft_flag_checker(argv + 1, argc - 1, flags);
 		i += n_flags;
 		if (i == argc)
 			return (0);
