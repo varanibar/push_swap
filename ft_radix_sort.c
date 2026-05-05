@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/01 15:33:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 15:56:54 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 12:36:54 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,6 @@ static void	ft_process_one_bit(t_stack **stack_a, t_stack **stack_b,
 	}
 	while (*stack_b != NULL)
 		pa(stack_a, stack_b, counter);
-}
-
-static int	ft_is_stack_sorted(t_stack **stack_a)
-{
-	t_stack	*current;
-	t_stack	*next;
-	int		size;
-	int		i;
-
-	current = *stack_a;
-	next = NULL;
-	size = ft_stack_size(*stack_a);
-	i = 0;
-	while (i < size - 1)
-	{
-		next = current->next;
-		if (current->val > next->val)
-			return (0);
-		current = next;
-		i++;
-	}
-	return (1);
 }
 
 //function too long : either create another f(x) or reate another struct
