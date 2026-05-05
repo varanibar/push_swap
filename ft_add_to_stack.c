@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 14:14:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 11:48:11 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 23:36:19 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	ft_add_to_stack(t_stack **stack, int val)
 {
 	t_stack	*new_node;
 
-	new_node = malloc(sizeof(t_stack));
+	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_node)
-		return (-1);
+		return (0);
 	new_node->val = val;
 	new_node->rank = -1;
 	new_node->next = NULL;
