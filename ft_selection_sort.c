@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 16:57:01 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/29 17:08:25 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 12:40:19 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	ft_min_index(t_stack *stack)
 //so if number is in the upper half do ra, if number is in lower half do rra.
 //once lowest number is at top push to b.
 
+
 static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
 	t_ops *counter)
 {
@@ -59,9 +60,17 @@ static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
 		stack_size = ft_stack_size(*stack_a);
 		min_pos = ft_min_index(*stack_a);
 		if (min_pos <= (stack_size / 2))
+		{
 			ra(stack_a, counter);
+			if (ft_is_stack_sorted(stack_a))
+				return ;
+		}
 		else
+		{
 			rra(stack_a, counter);
+			if (ft_is_stack_sorted(stack_a))
+				return ;
+		}
 	}
 	pb (stack_b, stack_a, counter);
 }
@@ -71,14 +80,20 @@ static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
 
 void	ft_selection_sort(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
 {
-	while (*stack_a != NULL)
+	int size;
+	int i;
+
+	size  = ft_stack_size(*stack_a);
+	i = 0;
+	while (i < size - 1)
 	{
 		ft_rotate_and_push(stack_a, stack_b, counter);
+		if (ft_is_stack_sorted(stack_a))
+			break;
+		i++;
 	}
 	while (*stack_b != NULL)
-	{
 		pa (stack_a, stack_b, counter);
-	}
 }
 
 // int	main(int argc, char **argv)
