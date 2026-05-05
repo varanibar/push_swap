@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/01 15:33:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 18:51:06 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 20:20:09 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	ft_bits(t_stack *stack)
 	return (bits);
 }
 
-static void	ft_process_one_bit(t_stack **stack_a, t_stack **stack_b, bool bench,
-	t_ops **counter, int bit_position)
+static void	ft_process_one_bit(t_stack **stack_a, t_stack **stack_b,
+	t_counter *counter, int bit_position)
 {
 	int		checked;
 	int		size;
@@ -42,30 +42,28 @@ static void	ft_process_one_bit(t_stack **stack_a, t_stack **stack_b, bool bench,
 	while (*stack_a != NULL && checked++ < size)
 	{
 		if ((((*stack_a)->rank >> bit_position) & 1) == 0)
-			pb(stack_b, stack_a, bench, counter);
+			pb(stack_b, stack_a, counter);
 		else
-			ra(stack_a, bench, counter);
+			ra(stack_a, counter);
 	}
 	while (*stack_b != NULL)
-		pa(stack_a, stack_b, bench, counter);
+		pa(stack_a, stack_b, counter);
 }
 
 //function too long : either create another f(x) or reate another struct
-void	ft_radix_sort(t_stack **stack_a, bool bench, t_ops **counter)
+void	ft_radix_sort(t_stack **stack_a, t_counter *counter)
 {
 	int		bit_position;
-	int		checked;
 	int		bits;
 	t_stack *stack_b;
 
 	bit_position = 0;
-	checked = 0;
 	bits = ft_bits(*stack_a);
 	ft_assign_rank(stack_a);
 	stack_b = NULL;
 	while (bit_position < bits)
 	{
-		ft_process_one_bit(stack_a, &stack_b, bench, counter, bit_position);
+		ft_process_one_bit(stack_a, &stack_b, counter, bit_position);
 		if (ft_is_stack_sorted(stack_a) == 1)
 			break ;
 		bit_position++;

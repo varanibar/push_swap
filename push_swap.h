@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 18:51:03 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/06 00:12:18 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ typedef struct s_counter
 }	t_counter;
 
 //initializing variables
-int					ft_init_t_flags(t_flags *flags);
-void				ft_init_t_ops(t_ops *ops);
-int					ft_init_t_counter(t_counter *counter);
+void				ft_init_variables(t_stack **stack_a, t_flags *flags, t_counter *counter);
 
 //validating input
-int					ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags);
+int					ft_check_input(int argc, char **argv, t_stack **stack, t_flags *flags);
 void				ft_free_array(char **input);
 int					ft_flag_strcmp(char *s1, char *s2);
 char				*ft_get_flag_type(int j);
@@ -84,24 +82,24 @@ int					ft_is_stack_sorted(t_stack **stack_a);
 void				ft_assign_rank(t_stack **stack);
 
 // operations
-void				sa(t_stack **stack_a, bool bench, t_ops **counter);
-void				sb(t_stack **stack_b, bool bench, t_ops **counter);
-void				ss(t_stack **stack_a, t_stack **stack_b, bool bench, t_ops **counter);
-void				pa(t_stack **stack_a, t_stack **stack_b, bool bench, t_ops **counter);
-void				pb(t_stack **stack_b, t_stack **stack_a, bool bench, t_ops **counter);
-void				ra(t_stack **stack_a, bool bench, t_ops **counter);
-void				rb(t_stack **stack_b, bool bench, t_ops **counter);
-void				rr(t_stack **stack_a, t_stack **stack_b, bool bench, t_ops **counter);
-void				rra(t_stack **stack_a, bool bench, t_ops **counter);
-void				rrb(t_stack **stack_b, bool bench, t_ops **counter);
-void				rrr(t_stack **stack_a, t_stack **stack_b, bool bench, t_ops **counter);
+void				sa(t_stack **stack_a, t_counter *counter);
+void				sb(t_stack **stack_b, t_counter *counter);
+void				ss(t_stack **stack_a, t_stack **stack_b, t_counter *counter);
+void				pa(t_stack **stack_a, t_stack **stack_b, t_counter *counter);
+void				pb(t_stack **stack_b, t_stack **stack_a, t_counter *counter);
+void				ra(t_stack **stack_a, t_counter *counter);
+void				rb(t_stack **stack_b, t_counter *counter);
+void				rr(t_stack **stack_a, t_stack **stack_b, t_counter *counter);
+void				rra(t_stack **stack_a, t_counter *counter);
+void				rrb(t_stack **stack_b, t_counter *counter);
+void				rrr(t_stack **stack_a, t_stack **stack_b, t_counter *counter);
 
 // printing stack DELETE THIS BEFORE SUBMITTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 void				print_stack(t_stack *stack);
 void				print_rank(t_stack *stack);
 
 // sorting functions
-void				ft_selection_sort(t_stack **stack_a, bool bench, t_ops **counter);
-void				ft_radix_sort(t_stack **stack_a, bool bench, t_ops **counter);
+void				ft_selection_sort(t_stack **stack_a, t_counter *counter);
+void				ft_radix_sort(t_stack **stack_a, t_counter *counter);
 
 #endif

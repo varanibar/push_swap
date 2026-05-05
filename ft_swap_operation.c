@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 14:12:45 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/05 16:20:08 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 20:05:28 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,28 @@ static void	swap(t_stack **stack)
 	*stack = second;
 }
 
-void	sa(t_stack **stack_a, bool bench, t_ops **counter)
+void	sa(t_stack **stack_a, t_counter *counter)
 {
 	swap(stack_a);
-	(*counter)->sa++;
-	if (bench == 0)
+	(counter->ops).sa++;
+	if (counter->print == 1)
 		ft_printf("%s\n", "sa");
 }
 
-void	sb(t_stack **stack_b, bool bench, t_ops **counter)
+void	sb(t_stack **stack_b, t_counter *counter)
 {
 	swap(stack_b);
-	(*counter)->sb++;
-	if (bench == 0)
+	(counter->ops).sb++;
+	if (counter->print == 1)
 		ft_printf("%s\n", "sb");
 }
 
-void	ss(t_stack **stack_a, t_stack **stack_b, bool bench, t_ops **counter)
+void	ss(t_stack **stack_a, t_stack **stack_b, t_counter *counter)
 {
 	swap(stack_a);
 	swap(stack_b);
-	(*counter)->ss++;
-	if (bench == 0)
+	(counter->ops).ss++;
+	if (counter->print == 1)
 		ft_printf("%s\n", "ss");
 }
 

@@ -5,8 +5,7 @@ SRCS = ft_add_to_stack.c \
 	ft_check_input_utils.c \
 	ft_disorder_metric.c \
 	ft_free_stack.c \
-	ft_init_t_counter.c \
-	ft_init_t_flags.c \
+	ft_init_variables.c \
 	ft_push_operation.c \
 	ft_radix_sort.c \
 	ft_reverse_rotate_operation.c \
