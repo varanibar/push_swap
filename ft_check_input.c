@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/04 15:29:22 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 14:20:17 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 	char	**input;
 
 	i = 0;
-	j = 0;
 	while (i < n)
 	{
+		j = 0;
 		input = ft_split(argv[i], ' ');
-		if (!input || input[0] == NULL)
-			return (ft_free_stack(stack), 0);
+		if (!input)
+			return (0);
+		else if (input[0] == NULL)
+			return (ft_free_array(input), 0);
 		while (input[j] != NULL)
 		{
 			if (!ft_is_str_valid(input[j]))
@@ -86,22 +88,10 @@ static int	ft_split_validate_add(char **argv, int n, t_stack **stack)
 			j++;
 		}
 		i++;
-		j = 0;
 		ft_free_array(input);
 	}
 	return (1);
 }
-/*
-** Main checker function, it's in charge of:
-**
-** 	- Checks if there are enough arguments passed
-** 	- Creates the node for the flags
-** 	- Checks the flags
-** 	- Sending the remaining arguments to a processing function splits,
-** 	  validates and adds the arguments to the stack
-** 	- Checks the duplicates
-**
-*/
 
 int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 {
@@ -122,15 +112,19 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags **flags)
 			return (0);
 		if (!ft_check_dup(*stack))
 			return (0);
-
 	}
 	return (1);
 }
 
 /*
-** Testing main for this function, when we call it in the
-** push swap function we need to be careful
-** to clear and free just like here
+** Main checker function, it's in charge of:
+**
+** 	- Checks if there are enough arguments passed
+** 	- Checks the flags
+** 	- Sending the remaining arguments to a processing function that splits,
+** 	  validates and adds the arguments to the stack. If it
+**
+** 	- Checks the duplicates
 **
 */
 
