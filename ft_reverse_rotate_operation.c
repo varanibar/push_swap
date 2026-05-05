@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:35:33 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/29 16:42:20 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 16:20:57 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,29 @@ static void	reverse_rotate(t_stack **stack)
 	*stack = current;
 }
 
-void	rra(t_stack **stack_a, t_ops *counter)
+void	rra(t_stack **stack_a, bool bench, t_ops **counter)
 {
 	reverse_rotate(stack_a);
-	counter->rra++;
-	ft_printf("%s\n", "rra");
+	(*counter)->rra++;
+	if (bench == 0)
+		ft_printf("%s\n", "rra");
 }
 
-void	rrb(t_stack **stack_b, t_ops *counter)
+void	rrb(t_stack **stack_b, bool bench, t_ops **counter)
 {
 	reverse_rotate(stack_b);
-	counter->rrb++;
-	ft_printf("%s\n", "rrb");
+	(*counter)->rrb++;
+	if (bench == 0)
+		ft_printf("%s\n", "rrb");
 }
 
-void	rrr(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
+void	rrr(t_stack **stack_a, t_stack **stack_b, bool bench, t_ops **counter)
 {
 	reverse_rotate(stack_a);
 	reverse_rotate(stack_b);
-	counter->rrr++;
-	ft_printf("%s\n", "rrr");
+	(*counter)->rrr++;
+	if (bench == 0)
+		ft_printf("%s\n", "rrr");
 }
 
 // int	main(void)

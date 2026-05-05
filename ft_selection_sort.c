@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 16:57:01 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/05 12:40:19 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 16:43:12 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ static int	ft_min_index(t_stack *stack)
 //so if number is in the upper half do ra, if number is in lower half do rra.
 //once lowest number is at top push to b.
 
-
 static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
-	t_ops *counter)
+	bool bench, t_ops **counter)
 {
 	int	min_pos;
 	int	stack_size;
@@ -61,39 +60,41 @@ static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
 		min_pos = ft_min_index(*stack_a);
 		if (min_pos <= (stack_size / 2))
 		{
-			ra(stack_a, counter);
+			ra(stack_a, bench, counter);
 			if (ft_is_stack_sorted(stack_a))
 				return ;
 		}
 		else
 		{
-			rra(stack_a, counter);
+			rra(stack_a, bench, counter);
 			if (ft_is_stack_sorted(stack_a))
 				return ;
 		}
 	}
-	pb (stack_b, stack_a, counter);
+	pb (stack_b, stack_a, bench, counter);
 }
 
 //Do ft_rotate_and_move until stack_a is empty and everything is in stack_b
 //then push everything from b back to a.
 
-void	ft_selection_sort(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
+void	ft_selection_sort(t_stack **stack_a, bool bench, t_ops **counter)
 {
-	int size;
-	int i;
+	int		size;
+	int		i;
+	t_stack	*stack_b;
 
-	size  = ft_stack_size(*stack_a);
+	size = ft_stack_size(*stack_a);
 	i = 0;
+	stack_b = NULL;
 	while (i < size - 1)
 	{
-		ft_rotate_and_push(stack_a, stack_b, counter);
+		ft_rotate_and_push(stack_a, &stack_b, bench, counter);
 		if (ft_is_stack_sorted(stack_a))
-			break;
+			break ;
 		i++;
 	}
-	while (*stack_b != NULL)
-		pa (stack_a, stack_b, counter);
+	while (stack_b != NULL)
+		pa (stack_a, &stack_b, bench, counter);
 }
 
 // int	main(int argc, char **argv)

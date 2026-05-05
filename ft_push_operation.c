@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 14:11:32 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/29 16:41:52 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 16:29:43 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,20 @@ static void	push(t_stack **dest, t_stack **src)
 	ft_ps_lstadd_front(dest, tmp);
 }
 
-void	pa(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
+void	pa(t_stack **stack_a, t_stack **stack_b, bool bench, t_ops **counter)
 {
 	push(stack_a, stack_b);
-	counter->pa++;
-	ft_printf("%s\n", "pa");
+	(*counter)->pa++;
+	if (bench == 0)
+		ft_printf("%s\n", "pa");
 }
 
-void	pb(t_stack **stack_b, t_stack **stack_a, t_ops *counter)
+void	pb(t_stack **stack_b, t_stack **stack_a, bool bench, t_ops **counter)
 {
 	push(stack_b, stack_a);
-	counter->pb++;
-	ft_printf("%s\n", "pb");
+	(*counter)->pb++;
+	if (bench == 0)
+		ft_printf("%s\n", "pb");
 }
 // int	main(void)
 // {
