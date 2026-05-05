@@ -6,73 +6,83 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/29 14:42:01 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/29 16:36:10 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 11:29:05 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	offset(const char *format_str, int *i)
+static long	ft_get_multiplier(int precision)
 {
-	if (*format_str == '.')
+	long	multiplier;
+	int		n;
+
+	n = 0;
+	multiplier = 1;
+	while (precision > 0)
 	{
-		while (*format_str != 'f')
-		{
-			*i = *i + 1;
-			format_str++;
-		}
+		multiplier = multiplier * 10;
+		precision--;
 	}
+	return (multiplier);
 }
 
-int	get_precision(double *nbr, const char *specif, int *multiplier)
+static int	ft_get_precision(const char *specif)
 {
-	int	precision;
-	int	i;
+	int		precision;
+	int		i;
+	char	*str;
 
 	i = 0;
-	precision = 0;
 	if (*specif == 'f')
-		precision = 6;
-	else if (*specif == '.' && *(specif + 1) != 'f')
-	{
-		specif++;
-		while (*specif >= '0' && *specif <= '9')
-		{
-			precision = precision * 10 + *specif - '0';
-			specif++;
-		}
-		if (precision > 15)
-			precision = 15;
-	}
-	while (precision - i++ > 0)
-		*multiplier = *multiplier * 10;
-	*nbr = *nbr + (0.5 / *multiplier);
+		return (6);
+	else if (*specif == '.' && *(specif + 1) == 'f')
+		return (0);
+	str = ft_strdup(specif + 1);
+	if (!str)
+		return (-1);
+	while (str[i] != 'f')
+		i++;
+	str[i] = '\0';
+	precision = ft_atoi(str);
+	free(str);
+	if (precision > 18)
+		precision = 18;
 	return (precision);
+}
+
+static double	ft_round_number(double nbr, const char *specif,
+	int *precision, long *multiplier)
+{
+	*precision = ft_get_precision(specif);
+	*multiplier = ft_get_multiplier(*precision);
+	nbr = nbr + (0.5 / *multiplier);
+	return (nbr);
 }
 
 int	ft_print_float(double nbr, const char *specif)
 {
-	int	count;
-	int	multiplier;
-	int	precision;
-	int	decimal_number;
+	long	decimal_part;
+	long	integer_part;
+	int		precision;
+	long	multiplier;
+	int		count;
 
-	decimal_number = 0;
-	multiplier = 1;
 	count = 0;
 	if (nbr < 0)
 	{
 		count += write(1, "-", 1);
 		nbr = -nbr;
 	}
-	precision = get_precision(&nbr, specif, &multiplier);
-	count += ft_putnbr_b(nbr, "0123456789");
+	nbr = ft_round_number(nbr, specif, &precision, &multiplier);
+	integer_part = (long)nbr;
+	count += ft_putnbr_b(integer_part, "0123456789");
 	if (precision > 0)
 	{
 		count += write(1, ".", 1);
-		decimal_number = nbr * multiplier - (int)nbr * multiplier;
-		count += ft_putnbr_b(decimal_number, "0123456789");
-		if (decimal_number == 0)
+		decimal_part = (nbr - integer_part) * multiplier;
+		count += ft_putnbr_b(decimal_part, "0123456789");
+		if (decimal_part == 0)
 			while (--precision > 0)
 				count += write(1, "0", 1);
 	}

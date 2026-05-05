@@ -6,11 +6,23 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/09 14:31:51 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/29 14:55:47 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 11:31:00 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	ft_offset(const char *format_str, int *i)
+{
+	if (*format_str == '.')
+	{
+		while (*format_str != 'f')
+		{
+			*i = *i + 1;
+			format_str++;
+		}
+	}
+}
 
 static int	ft_print_format(const char *specif, va_list arg)
 {
