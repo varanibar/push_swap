@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/30 15:30:30 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/04 17:36:22 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/05/05 14:41:09 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	ft_chunk_sort(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
 	int			og_stack_size;
 	t_bounds	chunk;
 
+	ft_assign_rank(stack_a);
 	chunk_amount = ft_sqrt(ft_stack_size(*stack_a));
 	chunk_num = 0;
 	og_stack_size = ft_stack_size(*stack_a);

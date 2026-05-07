@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 16:57:01 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/04/29 17:08:25 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/05 16:28:37 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,17 @@ static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
 		stack_size = ft_stack_size(*stack_a);
 		min_pos = ft_min_index(*stack_a);
 		if (min_pos <= (stack_size / 2))
+		{
 			ra(stack_a, counter);
+			if (ft_is_stack_sorted(stack_a))
+			return;
+		}
 		else
+		{
 			rra(stack_a, counter);
+			if (ft_is_stack_sorted(stack_a))
+			return;
+		}
 	}
 	pb (stack_b, stack_a, counter);
 }
@@ -74,6 +82,8 @@ void	ft_selection_sort(t_stack **stack_a, t_stack **stack_b, t_ops *counter)
 	while (*stack_a != NULL)
 	{
 		ft_rotate_and_push(stack_a, stack_b, counter);
+		if (ft_is_stack_sorted(stack_a))
+			break;
 	}
 	while (*stack_b != NULL)
 	{

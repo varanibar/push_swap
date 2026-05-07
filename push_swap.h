@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 16:53:28 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/05/07 10:42:25 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ typedef struct s_ops
 	int				rrr;
 }					t_ops;
 
+int	ft_push_swap(t_stack **stack_a, t_stack **stack_b, t_flags *flags,
+		t_ops *counter);
+
 // initializing variables
 int					ft_init_t_counter(t_ops **counter);
 int					ft_init_t_flags(t_flags **flags);
@@ -81,6 +84,7 @@ int					ft_add_to_stack(t_stack **stack, int val);
 void				ft_free_stack(t_stack **stack);
 int					ft_stack_size(t_stack *stack);
 void				ft_assign_rank(t_stack **stack);
+int					ft_is_stack_sorted(t_stack **stack_a);
 
 // operations
 void				sa(t_stack **stack_a, t_ops *counter);
