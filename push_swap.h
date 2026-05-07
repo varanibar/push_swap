@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/06 00:12:18 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 08:18:00 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void				rrr(t_stack **stack_a, t_stack **stack_b, t_counter *counter);
 void				print_stack(t_stack *stack);
 void				print_rank(t_stack *stack);
 
+//benchmark mode
+void				ft_benchmark(float disorder, t_flags *flags, t_counter *counter);
 // sorting functions
 void				ft_selection_sort(t_stack **stack_a, t_counter *counter);
 void				ft_radix_sort(t_stack **stack_a, t_counter *counter);

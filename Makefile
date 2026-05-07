@@ -16,7 +16,8 @@ SRCS = ft_add_to_stack.c \
 	push_swap.c \
 	print_stack.c print_rank.c\
 	ft_chunk_sort.c \
-	ft_is_stack_sorted.c
+	ft_is_stack_sorted.c \
+	ft_benchmark.c
 
 OBJS = $(SRCS:.c=.o)
 
