@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 12:26:26 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 08:18:00 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 11:56:21 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ typedef struct s_counter
 	t_ops		ops;
 }	t_counter;
 
+typedef struct s_bounds
+{
+	int				min;
+	int				max;
+	int				size;
+}	t_bounds;
+
 //initializing variables
 void				ft_init_variables(t_stack **stack_a, t_flags *flags, t_counter *counter);
 
@@ -99,9 +106,16 @@ void				print_stack(t_stack *stack);
 void				print_rank(t_stack *stack);
 
 //benchmark mode
-void				ft_benchmark(float disorder, t_flags *flags, t_counter *counter);
+void				ft_benchmark(t_flags *flags, t_counter *counter, float disorder);
 // sorting functions
 void				ft_selection_sort(t_stack **stack_a, t_counter *counter);
+void				ft_chunk_sort(t_stack **stack_a, t_counter *counter);
 void				ft_radix_sort(t_stack **stack_a, t_counter *counter);
+
+// chunk sort utils
+int					ft_sqrt(int nb);
+int					ft_max_index(t_stack *stack_b);
+int					ft_find_chunk_index(t_stack **stack_a, int chunk_min,
+						int chunk_max);
 
 #endif

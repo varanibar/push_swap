@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/06 00:01:38 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 12:46:41 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,15 @@ static int	ft_check_limits(char *str)
 {
 	int		i;
 	long	nbr;
-	int		sign;
 	long	limit;
 
 	i = 0;
 	nbr = 0;
-	sign = 1;
 	limit = INT_MAX;
 	if (str[i] == '-')
 	{
-		sign = -sign;
-		i++;
 		limit += 1;
+		i++;
 	}
 	while (ft_isdigit(str[i]))
 	{
@@ -127,6 +124,7 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags *flags)
 		if (!ft_check_dup(*stack))
 			return (0);
 	}
+	ft_assign_rank(stack);
 	return (1);
 }
 

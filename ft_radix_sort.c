@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/01 15:33:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 20:20:09 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 12:29:23 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ft_radix_sort(t_stack **stack_a, t_counter *counter)
 
 	bit_position = 0;
 	bits = ft_bits(*stack_a);
-	ft_assign_rank(stack_a);
 	stack_b = NULL;
 	while (bit_position < bits)
 	{

@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/07 08:08:53 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 09:40:48 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 13:25:26 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ static char	*ft_strategy(int i, float disorder)
 
 	if (i == 0 || i == 4)
 	{
-		i = 0;
-		if (disorder < 20.00)
-			strategy[0] = "Adaptive / O(n²)";
-		else if (disorder >= 20.00 && disorder < 50.00)
-			strategy[0] = "Adaptive / O(n√n)";
+		if (disorder == 0)
+			strategy[i] = " ";
+		else if (disorder < 20.00)
+			strategy[i] = "Adaptive / O(n²)";
+		else if (disorder < 50.00)
+			strategy[i] = "Adaptive / O(n√n)";
 		else
-			strategy[0] = "Adaptive / O(n log n)";
+			strategy[i] = "Adaptive / O(n log n)";
 	}
 	strategy[1] = "Simple O(n²)";
 	strategy[2] = "Medium O(n√n)";
@@ -33,7 +34,7 @@ static char	*ft_strategy(int i, float disorder)
 	return (strategy[i]);
 }
 
-void	ft_benchmark(float disorder, t_flags *flags, t_counter *counter)
+void	ft_benchmark(t_flags *flags, t_counter *counter, float disorder)
 {
 	int		total_ops;
 	t_ops	ops;
