@@ -6,22 +6,24 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/07 08:08:53 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 13:25:26 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:13:35 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-static char	*ft_strategy(int i, float disorder)
+static char	*ft_strategy(t_stack **stack_a, int i, float disorder)
 {
 	char	*strategy[4];
 
+	if (disorder == 0)
+		return ("");
 	if (i == 0 || i == 4)
 	{
-		if (disorder == 0)
-			strategy[i] = " ";
-		else if (disorder < 20.00)
+		if (ft_stack_size(*stack_a) <= 5)
+			return ("Adaptive / O(n²)");
+		if (disorder < 20.00)
 			strategy[i] = "Adaptive / O(n²)";
 		else if (disorder < 50.00)
 			strategy[i] = "Adaptive / O(n√n)";
@@ -34,7 +36,8 @@ static char	*ft_strategy(int i, float disorder)
 	return (strategy[i]);
 }
 
-void	ft_benchmark(t_flags *flags, t_counter *counter, float disorder)
+void	ft_benchmark(t_stack **stack_a, t_flags *flags, t_counter *counter,
+		float disorder)
 {
 	int		total_ops;
 	t_ops	ops;
@@ -43,7 +46,8 @@ void	ft_benchmark(t_flags *flags, t_counter *counter, float disorder)
 	total_ops = ops.sa + ops.sb + ops.ss + ops.pa + ops.pb
 		+ ops.ra + ops.rb + ops.rr + ops.rra + ops.rrb + ops.rrr;
 	ft_e_printf("[bench] disorder:  %.2f%%\n", disorder);
-	ft_e_printf("[bench] strategy:  %s\n", ft_strategy(flags->method, disorder));
+	ft_e_printf("[bench] strategy:  %s\n",
+		ft_strategy(stack_a, flags->method, disorder));
 	ft_e_printf("[bench] total_ops:  %d\n", total_ops);
 	ft_e_printf("[bench] sa:  %d  sb:  %d  ss:  %d  ", ops.sa, ops.sb, ops.ss);
 	ft_e_printf("pa:  %d  pb:  %d\n", ops.pa, ops.pb);

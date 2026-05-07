@@ -6,14 +6,15 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/30 15:30:30 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/07 10:44:53 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:10:50 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
-// rotates stack_b until max is at top, then pushes back to a.
-static void	push_back_to_a(t_stack **stack_a, t_stack **stack_b, t_counter *counter)
+#include "libft.h"
+
+static void	push_back_to_a(t_stack **stack_a, t_stack **stack_b,
+		t_counter *counter)
 {
 	int	max_index;
 
@@ -32,7 +33,6 @@ static void	push_back_to_a(t_stack **stack_a, t_stack **stack_b, t_counter *coun
 	}
 }
 
-// calculates chunk_size, chunk_min and chunk_max and updates those in struct.
 static t_bounds	ft_get_chunk_bounds(int chunk_num, int chunk_amount,
 		int og_stack_size)
 {
@@ -50,7 +50,6 @@ static t_bounds	ft_get_chunk_bounds(int chunk_num, int chunk_amount,
 	return (chunk);
 }
 
-// rotates stack a until top is in chunk. If top is in chunk pushes to b.
 static void	rotate_and_push_to_b(t_stack **stack_a, t_stack **stack_b,
 		t_counter *counter, t_bounds chunk)
 {
@@ -98,36 +97,3 @@ void	ft_chunk_sort(t_stack **stack_a, t_counter *counter)
 	}
 	push_back_to_a(stack_a, &stack_b, counter);
 }
-
-// #include <stdio.h>
-
-// int	main(int argc, char **argv)
-// {
-// 	t_stack	*stack_a;
-// 	t_stack	*stack_b;
-// 	t_ops	counter = {0};
-// 	int		input[argc];
-// 	int		i;
-// 	int		j;
-
-// 	stack_a = NULL;
-// 	stack_b = NULL;
-// 	i = 0;
-// 	j = 1;
-// 	while (j < argc)
-// 	{
-// 		input[i] = ft_atoi(argv[j]);
-// 		ft_add_to_stack(&stack_a, input[i]);
-// 		i++;
-// 		j++;
-// 	}
-// 	// ft_printf("%s\n", "stack_a:");
-// 	print_stack(stack_a);
-// 	ft_assign_rank(&stack_a);
-// 	ft_chunk_sort(&stack_a, &stack_b, &counter);
-// 	// ft_printf("stack a after sort:\n");
-// 	// print_stack(stack_a);
-// 	// ft_printf("stack b after sort:\n");
-// 	// print_stack(stack_b);
-// 	// return (0);
-// }

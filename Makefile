@@ -1,11 +1,16 @@
 NAME = push_swap
 
 SRCS = ft_add_to_stack.c \
-	ft_check_input.c \
+	ft_assign_rank.c \
+	ft_benchmark.c \
 	ft_check_input_utils.c \
+	ft_check_input.c \
+	ft_chunk_sort_utils.c \
+	ft_chunk_sort.c \
 	ft_disorder_metric.c \
 	ft_free_stack.c \
 	ft_init_variables.c \
+	ft_is_stack_sorted.c \
 	ft_push_operation.c \
 	ft_radix_sort.c \
 	ft_reverse_rotate_operation.c \
@@ -13,13 +18,7 @@ SRCS = ft_add_to_stack.c \
 	ft_selection_sort.c \
 	ft_stack_size.c \
 	ft_swap_operation.c \
-	push_swap.c \
-	print_stack.c print_rank.c\
-	ft_chunk_sort.c \
-	ft_chunk_sort_utils.c \
-	ft_is_stack_sorted.c \
-	ft_benchmark.c \
-	ft_assign_rank.c
+	push_swap.c
 
 OBJS = $(SRCS:.c=.o)
 

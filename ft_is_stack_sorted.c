@@ -6,23 +6,23 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/05 12:35:23 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 12:35:38 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:19:32 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-int	ft_is_stack_sorted(t_stack **stack_a)
+int	ft_is_stack_sorted(t_stack **stack)
 {
 	t_stack	*current;
 	t_stack	*next;
 	int		size;
 	int		i;
 
-	current = *stack_a;
+	current = *stack;
 	next = NULL;
-	size = ft_stack_size(*stack_a);
+	size = ft_stack_size(*stack);
 	i = 0;
 	while (i < size - 1)
 	{
