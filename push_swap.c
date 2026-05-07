@@ -6,7 +6,7 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/18 13:51:14 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 10:41:35 by lekoelma      ########   odam.nl         */
+/*   Updated: 2026/05/07 11:51:27 by lekoelma      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv)
 		|| ft_stack_size(stack_a) == 1)
 		return (ft_printf("Error\n"), ft_free_all(&stack_a, &flags, &counter),
 			0);
-	if (!ft_sort(&stack_a, &stack_b, flags, counter))
+	if (!ft_push_swap(&stack_a, &stack_b, flags, counter))
 		return (ft_free_all(&stack_a, &flags, &counter), 0);
 	return (ft_free_all(&stack_a, &flags, &counter), 0, 0);
 }
