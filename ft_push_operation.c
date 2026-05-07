@@ -6,12 +6,12 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 14:11:32 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/07 18:25:16 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:38:00 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
+#include "libft/libft.h"
 
 static void	ft_ps_lstadd_front(t_stack **lst, t_stack *new)
 {
@@ -48,33 +48,3 @@ void	pb(t_stack **stack_b, t_stack **stack_a, t_counter *counter)
 	if (counter->print == 1)
 		ft_printf("%s\n", "pb");
 }
-// int	main(void)
-// {
-// 	t_stack *stack_a;
-// 	t_stack *stack_b;
-// 	int i;
-// 	int j;
-
-// 	stack_a = NULL;
-// 	stack_b = NULL;
-// 	i = 4;
-// 	j = 8;
-// 	while (i > 0)
-// 	{
-// 		ft_add_to_stack(&stack_a, i);
-// 		ft_add_to_stack(&stack_b, j);
-// 		i--;
-// 		j--;
-// 	}
-// 	ft_printf("%s\n", "stack_a before operation:");
-// 	print_stack(stack_a);
-// 	ft_printf("%s\n", "stack_b before operation:");
-// 	print_stack(stack_b);
-// 	// pa(&stack_a, &stack_b);
-// 	pb(&stack_b, &stack_a);
-// 	ft_printf("%s\n", "stack_a after operation:");
-// 	print_stack(stack_a);
-// 	ft_printf("%s\n", "stack_b after operation:");
-// 	print_stack(stack_b);
-// 	return (0);
-// }

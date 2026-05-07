@@ -26,6 +26,8 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
+LIBFT_DIR = libft
+
 LIBFT_A = libft.a
 
 RM = rm -f
@@ -33,11 +35,10 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME) : $(LIBFT_A) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)/$(LIBFT_A) -o $(NAME)
 
 $(LIBFT_A):
 	make -C libft
-	cp libft/libft.a libft/libft.h .
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

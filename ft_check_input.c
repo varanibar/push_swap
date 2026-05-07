@@ -6,12 +6,12 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:36:55 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/07 12:46:41 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:35:01 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 static int	ft_check_chars(char *str)
 {
@@ -134,26 +134,6 @@ int	ft_check_input(int argc, char **argv, t_stack **stack, t_flags *flags)
 ** 	- Checks if there are enough arguments passed
 ** 	- Checks the flags
 ** 	- Sending the remaining arguments to a processing function that splits,
-** 	  validates and adds the arguments to the stack. If it
-**
+** 	  validates and adds the arguments to the stack.
 ** 	- Checks the duplicates
-**
 */
-
-// int	main(int argc, char **argv)
-// {
-// 	t_stack	*stack_a;
-// 	t_flags	*flags;
-
-// 	stack_a = NULL;
-// 	flags = NULL;
-// 	if (!ft_check_input(argc, argv, &stack_a, &flags))
-// 	{
-// 		ft_free_stack(&stack_a);
-// 		free(flags);
-// 		return (ft_printf("Error\n"), 0);
-// 	}
-// 	ft_free_stack(&stack_a);
-// 	free(flags);
-// 	return (0);
-// }

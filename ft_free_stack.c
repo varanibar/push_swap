@@ -6,12 +6,11 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/23 17:04:51 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/23 17:07:18 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:37:01 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 void	ft_free_stack(t_stack **stack)
 {

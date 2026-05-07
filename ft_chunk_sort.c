@@ -6,12 +6,11 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/30 15:30:30 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/07 18:10:50 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:36:38 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 static void	push_back_to_a(t_stack **stack_a, t_stack **stack_b,
 		t_counter *counter)

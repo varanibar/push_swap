@@ -6,16 +6,11 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/22 16:57:01 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/05 23:22:11 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:43:46 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
-
-//Finds the index of the lowest number in stack_a,
-//min_pos is set to the counter if our current value
-//is smaller then our current minimal.
 
 static int	ft_min_index(t_stack *stack)
 {
@@ -40,11 +35,6 @@ static int	ft_min_index(t_stack *stack)
 	}
 	return (min_pos);
 }
-
-//rotate stack_a until the lowest number is at the top
-//find the shortest route to get lowest number to the top (lowest cost)
-//so if number is in the upper half do ra, if number is in lower half do rra.
-//once lowest number is at top push to b.
 
 static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
 	t_counter *counter)
@@ -74,9 +64,6 @@ static void	ft_rotate_and_push(t_stack **stack_a, t_stack **stack_b,
 	pb (stack_b, stack_a, counter);
 }
 
-//Do ft_rotate_and_move until stack_a is empty and everything is in stack_b
-//then push everything from b back to a.
-
 void	ft_selection_sort(t_stack **stack_a, t_counter *counter)
 {
 	int		size;
@@ -96,31 +83,3 @@ void	ft_selection_sort(t_stack **stack_a, t_counter *counter)
 	while (stack_b != NULL)
 		pa (stack_a, &stack_b, counter);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_stack *stack_a = NULL;
-// 	t_stack *stack_b = NULL;
-// 	int input[argc];
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	j = argc - 1;
-// 	while (j > 0)
-// 	{
-// 		input[i] = ft_atoi(argv[j]);
-// 		ft_add_to_stack(&stack_a, input[i]);
-// 		i++;
-// 		j--;
-// 	}
-// 	ft_printf("%s\n", "stack_a:");
-// 	print_stack(stack_a);
-// 	ft_printf("%s\n", "operations used:");
-// 	ft_selection_sort(&stack_a, &stack_b);
-// 	ft_printf("%s\n", "stack_a:");
-// 	print_stack(stack_a);
-// 	ft_free_stack(&stack_a);
-// 	ft_free_stack(&stack_b);
-// 	return (0);
-// }

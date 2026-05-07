@@ -6,15 +6,11 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/01 15:33:58 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 18:11:14 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:38:59 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
-
-//we need to find the highest index/rank number to know
-//the amount of bit positions we will read
 
 static int	ft_bits(t_stack *stack)
 {
@@ -50,7 +46,6 @@ static void	ft_process_one_bit(t_stack **stack_a, t_stack **stack_b,
 		pa(stack_a, stack_b, counter);
 }
 
-//function too long : either create another f(x) or reate another struct
 void	ft_radix_sort(t_stack **stack_a, t_counter *counter)
 {
 	int		bit_position;
@@ -68,62 +63,3 @@ void	ft_radix_sort(t_stack **stack_a, t_counter *counter)
 		bit_position++;
 	}
 }
-
-// int	main(void)
-// {
-// 	t_ops *counter = NULL;
-// 	t_stack *stack_a = NULL;
-// 	t_stack *stack_b = NULL;
-
-// 	t_stack *first = malloc(sizeof(t_stack));
-// 	t_stack *second = malloc(sizeof(t_stack));
-// 	t_stack *third = malloc(sizeof(t_stack));
-// 	t_stack *fourth = malloc(sizeof(t_stack));
-
-// 	ft_create_t_counter(&counter);
-
-// 	stack_a = first;
-
-// 	first->val = 0;
-// 	first->rank = 0;
-// 	first->next = second;
-
-// 	second->val = 3;
-// 	second->rank = 3;
-// 	second->next = third;
-
-// 	third->val = 2;
-// 	third->rank = 2;
-// 	third->next = fourth;
-
-// 	fourth->val = 1;
-// 	fourth->rank = 1;
-// 	fourth->next = NULL;
-
-// 	ft_printf("%d\n",ft_stack_size(stack_a));
-// 	ft_printf("%d\n",ft_bits(stack_a));
-// 	// int bits = ft_bits(stack_a);
-// 	// int bit_position = 0;
-// 	// int value_bit = 0;
-// 	// t_stack *current = stack_a;
-
-// 	// while (current != NULL)
-// 	// {
-// 	// 	bit_position = 0;
-// 	// 	ft_printf("current is %d\n", current->rank);
-// 	// 	while (bit_position < bits)
-// 	// 	{
-// 	// 		value_bit = ((current->rank) >> bit_position) & 1;
-// 	// 		ft_printf("bit %d : %d\n", bit_position, value_bit);
-// 	// 		bit_position++;
-// 	// 	}
-// 	// 	current = current->next;
-// 	// }
-// 	ft_printf("BEFORE\n");
-// 	print_stack(stack_a);
-// 	ft_radix_sort(&stack_a ,&stack_b, counter);
-// 	ft_printf("AFTER\n");
-// 	print_stack(stack_a);
-// 	return(0);
-
-// }

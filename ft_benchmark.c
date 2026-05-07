@@ -6,12 +6,12 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/07 08:08:53 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 18:13:35 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:33:24 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 static char	*ft_strategy(t_stack **stack_a, int i, float disorder)
 {

@@ -6,12 +6,11 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/23 16:48:11 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 15:40:48 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:33:40 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 void	ft_free_array(char **input)
 {

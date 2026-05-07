@@ -6,11 +6,10 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/04 15:59:56 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/07 10:41:58 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:35:57 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
 
 int	ft_sqrt(int nb)

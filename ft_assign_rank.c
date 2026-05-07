@@ -6,12 +6,11 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/07 10:40:06 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 10:41:46 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:33:07 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 static t_stack	*ft_find_min(t_stack *stack)
 {

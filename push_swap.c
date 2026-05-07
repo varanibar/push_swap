@@ -6,12 +6,12 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/18 13:51:14 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 18:11:37 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:32:12 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 static void	ft_adaptive(t_stack **stack_a, t_counter *counter, float disorder)
 {

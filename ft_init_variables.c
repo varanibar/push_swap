@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_init_t_counter.c                                :+:    :+:            */
+/*   ft_init_variables.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/05/04 09:45:28 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/06 00:10:47 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:37:11 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 static void	ft_init_t_flags(t_flags *flags)
 {

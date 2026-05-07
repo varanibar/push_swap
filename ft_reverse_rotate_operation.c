@@ -6,12 +6,12 @@
 /*   By: lekoelma <lekoelma@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/20 15:35:33 by lekoelma      #+#    #+#                 */
-/*   Updated: 2026/05/05 20:12:23 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/07 18:41:10 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
+#include "libft/libft.h"
 
 static void	reverse_rotate(t_stack **stack)
 {
