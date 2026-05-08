@@ -20,7 +20,9 @@ SRCS = ft_add_to_stack.c \
 	ft_swap_operation.c \
 	push_swap.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS_DIR = object_files
+
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 CC = cc
 
@@ -30,7 +32,7 @@ LIBFT_DIR = libft
 
 LIBFT_A = libft.a
 
-RM = rm -f
+RM = rm -rf
 
 all: $(NAME)
 
@@ -40,15 +42,18 @@ $(NAME) : $(LIBFT_A) $(OBJS)
 $(LIBFT_A):
 	make -C libft
 
-%.o: %.c
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJS_DIR):
+	mkdir -p $@
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 	make clean -C libft
 
 fclean:	clean
-	$(RM) $(NAME) $(LIBFT_A) libft.h
+	$(RM) $(NAME)
 	make fclean -C libft
 
 re: fclean all

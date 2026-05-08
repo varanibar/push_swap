@@ -50,13 +50,15 @@ SRCS = ft_isalpha.c \
 	ft_e_printf_utils.c \
 	ft_e_printf_additional_specifier.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS_DIR = object_files
+
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-RM = rm -f
+RM = rm -rf
 
 AR = ar csr
 
@@ -65,11 +67,14 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-%.o: %.c
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJS_DIR):
+	mkdir -p $@
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 
 fclean:	clean
 	$(RM) $(NAME)
