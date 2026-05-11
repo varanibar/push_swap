@@ -26,9 +26,9 @@ Only the following operations are allowed:
 	- `rrr` rra and rrb at the same time.
 
 ### ALGORITHM REQUIREMENTS
-Four distinct sorting strategies must be implemented and the program must be able to select a strategy at runtime based on the input configuration. When a complexity class is stated, the theoretical complexity of a classical array-based algorithm every considers CPU step as an operation, but for this project, the cost is measured in number of `push_swap` operations generated.
+Four distinct sorting strategies must be implemented and the program must be able to select a strategy at runtime based on the input configuration. When a complexity class is stated, the theoretical complexity of a classical array-based algorithm considers every CPU step as an operation, but for this project, the cost is measured in number of `push_swap` operations generated.
 
- The required strategies are:
+The required strategies are:
 1. Simple algorithm (O(*n²*))
 2. Medium algorithm (O(*n√n*))
 3. Complex algorithm (O(*n log n*))
@@ -42,21 +42,34 @@ If the stack is already sorted, there are no inverted pairs and the disorder is 
 ## METHOD
 
 The following algorithms have been implemented for each strategy:
-### Selection sort (O(*n²*)):
+### Selection sort - O(*n²*):
 Selection sort is a comparison-based sorted algorithm. It repeatedly looks for the smallest value in the unsorted part of the stack and moves it to its final position.
 
-For this projectm the algorithm is adapted to the `push_swap` constraint. Since values cannot be moved directly by index, the implementation first findst the position of the smallest value in stack `a`. Then, stack `a` is rotated until this value reaches the top. The rotation direction is chosen depending of the smalles value. Once the smallest value is at the top, it is pushed to stack `b`. The process is repeated until stack `a` is sorted or until the required passes have been completed. Finally, all values stored in stack `b` are pushed back to stack `a`.
+For this project, the algorithm is adapted to the `push_swap` constraint. Since values cannot be moved directly by index, the implementation first finds the position of the smallest value in stack `a`. Then, stack `a` is rotated until this value reaches the top. The rotation direction is chosen depending of the smalles value. Once the smallest value is at the top, it is pushed to stack `b`. The process is repeated until stack `a` is sorted or until the required passes have been completed. Finally, all values stored in stack `b` are pushed back to stack `a`.
 
 The implementation is divided into three main steps:
 - `ft_min_index` finds the position of the smallest value in stack `a`.
 - `ft_rotate_and_push` brings the smallest value to the top using `ra` or `rra`, then pushes it to stack `b`.
 - `ft_selection_sort` repeats this process and then pushes all values from stack `b` back to stack `a`.
-### Chunk sort (O(*n√n*)):
+### Chunk sort - O(*n√n*):
+Chunk sort is a rank-based sorting algorithm. Instead of comparing all values directly, it divides the ranked values into smaller groups called chunks and processes each chunk separately.
 
-### Radix sort LSD (O(*n log n*)):
+For this project, the number of chunks is based on the square root of the stack size. Each chunk represents a range of ranks. The algorithm searches stack `a` for values that belong to the current chunk, rotates stack `a` until one of those values reaches the top, and pushes it back to stack `b`.
+After all chunks have been pushed to stack `b`, the values are moved back to stack `a` in descending order. The algorithm repeatedly finds the highest value in stack `b`, rotates stack `b` until this value reaches the top, and pushes it back to stack `a`.
+
+The implementation is divided into several main steps:
+- `ft_sqrt` calculates the square root used to define the number of chunks.
+- `ft_get_chunk_bounds` calculates the minimum and maximum rank of the current chunk.
+- `ft_find_chunk_index` finds the first value in stack `a` that belongs to the current chunk.
+- `rotate_and_push_to_b` rotates stack `a` using `ra` or `rra`, then pushes values from the current chunk to stack `b`.
+- `ft_max_index` finds the position of the highest value in stack `b`.
+- `push_back_to_a` brings the highest value in stack `b` to the top using `rb` or `rrb`, then pushes it back to stack `a`.
+- `ft_chunk_sort` processes all chunks and then rebuilds stack `a` in sorted order.
+
+### Radix sort LSD - O(*n log n*):
 Radix sort LSD is a digit-based sorting algorithm. Instead of comparing values directly, it processes the numbers digit by digit, starting from the least significant digit. In the decimal version, each pass separates the values into several buckets according to the current digit.
 
-For this project, the algorithm is adapted to the `push_swap` constraint. Since only two stacks are available, the implementation uses the binary representation of the ranked values. Each pass checks one bit position and separates the values between stack `a` and stack `b`. Values with a `0`at the current bit are pushed back to stack `b`, while values with a `1` stay in stack `a`through rotation. After each pass, the values in stack `b` are pushed back to stack `a`. The process is repeated for each bit needed to represent the highest rank.
+For this project, the algorithm is adapted to the `push_swap` constraint. Since only two stacks are available, the implementation uses the binary representation of the ranked values. Each pass checks one bit position and separates the values between stack `a` and stack `b`. Values with a `0`at the current bit are pushed to stack `b`, while values with a `1` stay in stack `a`through rotation. After each pass, the values in stack `b` are pushed back to stack `a`. The process is repeated for each bit needed to represent the highest rank.
 
 The implementation is divided into three main steps:
 - `ft_bits` calculates how many bit positions are needed to represent the highest rank.
@@ -83,7 +96,11 @@ Available rules:
 ## Running the program
 
 ### Command-Line Interface (CLI)
-The subject requires support for flags and valid input, but it does not explicitly require GNU-style argument permutation (for instance: `cat -e file.txt` or `cat file.txt -e`).
+The subject requires support for flags and valid input, but it does not explicitly require GNU-style argument permutation, for instance:
+>>`cat -e file.txt`
+
+>>`cat file.txt -e`
+
 Because of this, the program uses the following strict argument grammar:
 
 ```bash
@@ -91,19 +108,29 @@ Because of this, the program uses the following strict argument grammar:
 ```
 
 Options are flags such as benchmark mode `--bench` or strategy flags such as `--simple`, `--medium`, `--complex`. Operands are the values the program works on, in this case the numbers to sort.
-Once the first operand is found, the options section is closed.  From that point, every following argument must be a valid integer.
+If flags are present, the options section is closed.  From that point, every following argument must be a valid integer.
 
 Available options:
 
 - Benchmark mode:
-  - `--bench` will show the metrics in addition to the operations made.
-- Strategy selection:
-  - `--simple` will force the simple complexity strategy (Selection sort).
-  - `--medium` will force the medium complexity strategy (Chunk sort).
-  - `--complex` will force the complex strategy (Radix sort).
-  - `--adaptive` will choose the algorithm according to the disorder metric. For a disorder of less than 20%, the simple strategy is used. A disorder of more or equal 20% but less than 50%, the medium strategy is applied. For a disorder of more or equal than 50%, the complex strategy will be selected. There is an exception to this cases, for a very small input (of <= 5 integers), even if there is a high disorder, the simple strategy has proven to be the most efficient for this type of input.
+  - `--bench` displays the computed disorder, the name of the selected strategy, its theoretical complexity class, the total number of operations, and the count of each operation type on `stderr`.
+- Strategy selector:
+  - `--simple` forces the simple strategy, based on Selection sort.
+  - `--medium` forces the medium strategy, based on Chunk sort.
+  - `--complex` forces the complex strategy, based on Radix sort.
+  - `--adaptive` selects one of the algorithms according to the disorder metric.
 
-  If no strategy option is specified, the default behavior is the adaptive strategy.
+  In adaptive mode, the strategy is selected as it follows:
+  - If the disorder is lower than 20%, the simple strategy is used.
+  - If the disorder is greater than or equal to 20% and lower than 50%, the medium strategy is used.
+  - If the disorder is greater than or equal to 50%, the complex strategy is used.
+
+  There is one exception to this rule: for very small inputs of 5 integers or less, the simple strategy is used even when the disorder is high, because it has proven to be more efficient for this type of input. If no strategy is specified, the default behavior is the adaptive strategy.
+
+  A maximum of two flags is accepted:
+
+  >>Benchmark mode + Strategy selector
+
 
 - Valid argument grammar:
 
@@ -130,18 +157,41 @@ Available options:
 ```bash
 ./push_swap --bench --simple
 ```
+# Contributions
+The work was divided between both contributors, with several parts later reviewed, adapted, or reused across the project.
+
+varaniba's main contributions:
+- Input parsing and argument validation
+- Command-line flag handling
+- Radix sort implementation
+- README structure and documentation
+
+lekoelma`s main contributions:
+- `push_swap` operations implementation
+- Selection sort implementation
+- Chunk sort implementation
+- Adaptive strategy implementation
+
+During the project duration, several functions and structures were adjusted together so they could be reused by different parts of the program. Some code was also adapted by the other contributor when needed to keep the project consistent and functional as a whole.
+
 # RESOURCES
-To create this library, the references and tools used were:
+To create this program, the references and tools used were:
 - Linux man page [manual](https://linux.die.net/man/)
 - W3 schools [DSA Time Complexity](https://www.w3schools.com/dsa/dsa_timecomplexity_theory.php)
 - GeeksforGeeks [Time Complexities of all Sorting Algorithms](https://www.geeksforgeeks.org/dsa/time-complexities-of-all-sorting-algorithms/)
-- GeeksforGeeks [Radix sort](https://www.geeksforgeeks.org/dsa/radix-sort/)
+- TutorialsPoint [Selection Sort Algorithm](https://www.tutorialspoint.com/data_structures_algorithms/selection_sort_algorithm.htm)
+- w3schools [Selection Sort](https://www.w3schools.com/dsa/dsa_algo_selectionsort.php)
+- Medium [Sorting Large Datasets with Limited Memory: The Chunked Merge Sort Approach](https://satyadeepmaheshwari.medium.com/sorting-large-datasets-with-limited-memory-the-chunked-merge-sort-approach-318275275c81)
+- GeeksforGeeks [Radix Sort Algorithm](https://www.geeksforgeeks.org/dsa/radix-sort/)
 
 - POSIX utility conventions [Utility Argument Syntax](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html)
  - GNU Coding Standards [Standards for Command Line Interfaces](https://www.gnu.org/prep/standards/standards.html#Command_002dLine-Interfaces)
 - Github [website](https://github.com/)
 
 AI Use:
-- ChatGPT :
+- ChatGPT and Claude:
+  - Understanding programming concepts;
+  - Debugging and reasoning about implementation issues;
+  - Improving README wording, grammar, and clarity.
 
-?????????????????????
+All the code, the implementation choices and final project structure were created by the authors.
