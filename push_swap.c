@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/18 13:51:14 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/07 18:32:12 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/11 08:04:10 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ static void	ft_adaptive(t_stack **stack_a, t_counter *counter, float disorder)
 static void	ft_push_swap(t_stack **stack_a, t_flags *flags, t_counter *counter,
 		float disorder)
 {
-	int	size;
-
 	counter->print = 1;
-	size = ft_stack_size(*stack_a);
 	if (flags->method == 1)
 		ft_selection_sort(stack_a, counter);
 	else if (flags->method == 2)

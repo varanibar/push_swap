@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/29 14:42:01 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/05 11:29:05 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/11 08:04:28 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 static long	ft_get_multiplier(int precision)
 {
 	long	multiplier;
-	int		n;
 
-	n = 0;
 	multiplier = 1;
 	while (precision > 0)
 	{
